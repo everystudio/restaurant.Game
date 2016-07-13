@@ -186,6 +186,7 @@ insert into new_table (test_key,test_value) values ('insert_key' , 'insert_value
 		//Debug.LogError ("here");
 		m_dataItem.Load (DataItem.FILENAME);
 
+		dataMapChipRestaurant.Load (DataMapChipRestaurant.FILENAME);
 		m_csvItemDetail.Load ();
 
 		//m_csvWork.Load ();
@@ -319,6 +320,8 @@ insert into new_table (test_key,test_value) values ('insert_key' , 'insert_value
 	public DataMonster dataMonster = new DataMonster ();
 	public DataStaff dataStaff= new DataStaff();
 
+
+	public DataMapChipRestaurant dataMapChipRestaurant = new DataMapChipRestaurant();
 
 	public CsvStaffData m_csvStaff = new CsvStaffData();
 	static public List<CsvStaffParam> csv_staff {

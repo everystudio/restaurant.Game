@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using System.Collections.Generic;
 
 [System.Serializable]
 public class DataMapChipRestaurantParam : DataMapChipBaseParam{
@@ -18,6 +18,17 @@ public class DataMapChipRestaurantParam : DataMapChipBaseParam{
 
 
 public class DataMapChipRestaurant : DataMapChipBase<DataMapChipRestaurantParam> {
+	public const string FILENAME = "data/mapchip_restaurant";
+
+	public List<DataMapChipRestaurantParam> GetActiveList (){
+		List<DataMapChipRestaurantParam> ret = new List<DataMapChipRestaurantParam> ();
+		foreach (DataMapChipRestaurantParam param in list) {
+			if (0 < param.x) {
+				ret.Add (param);
+			}
+		}
+		return ret;
+	}
 
 	public override bool Load (string _strFilename)
 	{
