@@ -199,7 +199,7 @@ public class ParkMainSettingItem : ParkMainController {
 
 		case STEP.IDLE:
 			if (bInit) {
-				InputManager.Info.TouchON = false;
+				InputManager.Instance.Info.TouchON = false;
 				m_YesNoButtonManager.TriggerClearAll ();
 				m_bTapRelease = false;
 				m_bButtonLock = false;
@@ -207,7 +207,7 @@ public class ParkMainSettingItem : ParkMainController {
 
 			}
 
-			if (InputManager.Info.Swipe) {
+			if (InputManager.Instance.Info.Swipe) {
 				m_eStep = STEP.SWIPE;
 
 
@@ -231,12 +231,12 @@ public class ParkMainSettingItem : ParkMainController {
 				}
 				m_YesNoButtonManager.TriggerClearAll ();
 				m_bButtonLock = true;
-			}  else if (InputManager.Info.TouchON && m_bButtonLock == false ) {
+			}  else if (InputManager.Instance.Info.TouchON && m_bButtonLock == false ) {
 				int iGridX = 0;
 				int iGridY = 0;
 
-				if ( Screen.height * 0.2f < InputManager.Info.TouchPoint.y ) {
-					if (GameMain.GetGrid (InputManager.Info.TouchPoint, out iGridX, out iGridY)) {
+				if ( Screen.height * 0.2f < InputManager.Instance.Info.TouchPoint.y ) {
+					if (GameMain.GetGrid (InputManager.Instance.Info.TouchPoint, out iGridX, out iGridY)) {
 						if (GameMain.GridHit (iGridX, iGridY, m_iEditItemX , m_iEditItemY , m_editItem.m_dataItemParam.width , m_editItem.m_dataItemParam.height, out m_iEditOffsetX, out m_iEditOffsetY)) {
 							//iSelectSerial = data_item.item_serial;
 							m_eStep = STEP.EDIT_TOUCH;
@@ -250,14 +250,14 @@ public class ParkMainSettingItem : ParkMainController {
 					}
 				}
 				/*
-				if (GameMain.GetGrid (InputManager.Info.TouchPoint, out iGridX, out iGridY)) {
+				if (GameMain.GetGrid (InputManager.Instance.Info.TouchPoint, out iGridX, out iGridY)) {
 					if (m_iEditItemX == iGridX && m_iEditItemY == iGridY) {
 						m_eStep = STEP.EDIT_TOUCH;
 					} else {
 					}
 				}
 				*/
-			} else if( InputManager.Info.TouchON == false ){
+			} else if( InputManager.Instance.Info.TouchON == false ){
 				if (m_bTapRelease == true) {
 					m_bTapRelease = false;
 					m_editItem.SetPos (m_iTempX, m_iTempY);
@@ -283,21 +283,21 @@ public class ParkMainSettingItem : ParkMainController {
 			if (bInit) {
 				m_bTapRelease = false;
 			}
-			m_parkMain.goParkRoot.transform.localPosition += new Vector3( InputManager.Info.SwipeAdd.x ,InputManager.Info.SwipeAdd.y , 0.0f );
+			m_parkMain.goParkRoot.transform.localPosition += new Vector3( InputManager.Instance.Info.SwipeAdd.x ,InputManager.Instance.Info.SwipeAdd.y , 0.0f );
 
-			if (InputManager.Info.Swipe == false) {
+			if (InputManager.Instance.Info.Swipe == false) {
 				m_eStep = STEP.IDLE;
 			}
 			break;
 
 		case STEP.EDIT_TOUCH:
 			if (bInit) {
-				InputManager.Info.TouchUp = false;
+				InputManager.Instance.Info.TouchUp = false;
 			}
 
-			if (InputManager.Info.Swipe) {
+			if (InputManager.Instance.Info.Swipe) {
 				m_eStep = STEP.EDIT_SWIPE;
-			} else if (InputManager.Info.TouchUp) {
+			} else if (InputManager.Instance.Info.TouchUp) {
 				m_eStep = STEP.IDLE;
 			} else {
 			}
@@ -305,11 +305,11 @@ public class ParkMainSettingItem : ParkMainController {
 
 			break;
 		case STEP.EDIT_SWIPE:
-			if (InputManager.Info.TouchON) {
+			if (InputManager.Instance.Info.TouchON) {
 				int iGridX = 0;
 				int iGridY = 0;
 
-				if (GameMain.GetGrid (InputManager.Info.TouchPoint, out iGridX, out iGridY)) {
+				if (GameMain.GetGrid (InputManager.Instance.Info.TouchPoint, out iGridX, out iGridY)) {
 
 					if (iGridX != m_iEditItemX || iGridY != m_iEditItemY) {
 						m_editItem.SetPos (iGridX - m_iEditOffsetX, iGridY - m_iEditOffsetY);
@@ -326,28 +326,28 @@ public class ParkMainSettingItem : ParkMainController {
 				int iWidth = (int)(Screen.width * 0.05f);
 				float fDelta = 20.0f;
 
-				if (InputManager.Info.TouchPoint.x < iWidth) {
+				if (InputManager.Instance.Info.TouchPoint.x < iWidth) {
 
 					//Debug.Log ("x short");
 					GameMain.ParkRoot.MoveAdd (fDelta, 0.0f);
-				} else if ( (Screen.width-iWidth) < InputManager.Info.TouchPoint.x) {
+				} else if ( (Screen.width-iWidth) < InputManager.Instance.Info.TouchPoint.x) {
 					//Debug.Log ("x high");
 					GameMain.ParkRoot.MoveAdd (fDelta*-1.0f, 0.0f);
 				} else {
 				}
-				if (InputManager.Info.TouchPoint.y < (int)(Screen.height * 0.3f)) {
+				if (InputManager.Instance.Info.TouchPoint.y < (int)(Screen.height * 0.3f)) {
 					//Debug.Log ("y short");
 					GameMain.ParkRoot.MoveAdd (0.0f, fDelta);
-				} else if ( ((int)(Screen.height * 0.6f)) < InputManager.Info.TouchPoint.y) {
+				} else if ( ((int)(Screen.height * 0.6f)) < InputManager.Instance.Info.TouchPoint.y) {
 					//Debug.Log ("y high");
 					GameMain.ParkRoot.MoveAdd (0.0f, fDelta*-1.0f);
 				} else {
 				}
 
-				//Debug.Log (InputManager.Info.TouchPoint);
+				//Debug.Log (InputManager.Instance.Info.TouchPoint);
 
 
-			} else if (InputManager.Info.TouchUp) {
+			} else if (InputManager.Instance.Info.TouchUp) {
 				m_eStep = STEP.IDLE;
 			}
 

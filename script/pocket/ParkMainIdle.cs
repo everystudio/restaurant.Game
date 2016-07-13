@@ -59,7 +59,7 @@ public class ParkMainIdle : ParkMainController
 		case STEP.IDLE:
 			if (bInit) {
 				m_parkMain.m_bInputTrigger = false;
-				InputManager.Info.TouchUp = false;
+				InputManager.Instance.Info.TouchUp = false;
 
 				// 更新
 				//DataManager.Instance.m_ItemDataList = GameMain.dbItem.Select (" status != 0 ");
@@ -82,14 +82,14 @@ public class ParkMainIdle : ParkMainController
 			}
 			else if (InputManager.Instance.IsPinch ()) {
 				m_eStep = STEP.PINCH;
-			} else if (InputManager.Info.Swipe) {
+			} else if (InputManager.Instance.Info.Swipe) {
 				m_eStep = STEP.SWIPE;
-			} else if (InputManager.Info.TouchUp) {
-				InputManager.Info.TouchUp = false;
+			} else if (InputManager.Instance.Info.TouchUp) {
+				InputManager.Instance.Info.TouchUp = false;
 				int iGridX = 0;
 				int iGridY = 0;
 
-				if (GameMain.GetGrid (InputManager.Info.TouchPoint, out iGridX, out iGridY)) {
+				if (GameMain.GetGrid (InputManager.Instance.Info.TouchPoint, out iGridX, out iGridY)) {
 
 					int iSelectSerial = 0;
 
@@ -143,18 +143,18 @@ public class ParkMainIdle : ParkMainController
 						break;
 					}
 				}
-			} else if (m_parkMain.m_bInputTrigger == false && InputManager.Info.TouchON) {
+			} else if (m_parkMain.m_bInputTrigger == false && InputManager.Instance.Info.TouchON) {
 				m_parkMain.m_bInputTrigger = true;
 
-			} else if (InputManager.Info.TouchON == false) {
+			} else if (InputManager.Instance.Info.TouchON == false) {
 				m_parkMain.m_bInputTrigger = false;
-			} else if (InputManager.Info.TouchON && m_bLongTapCheck== false ) {
+			} else if (InputManager.Instance.Info.TouchON && m_bLongTapCheck== false ) {
 				if (m_fLongTapTime < DefineOld.LONG_TAP_TIME) {
 					m_fLongTapTime += Time.deltaTime;
 				} else {
 					int iGridX = 0;
 					int iGridY = 0;
-					if (GameMain.GetGrid (InputManager.Info.TouchPoint, out iGridX, out iGridY)) {
+					if (GameMain.GetGrid (InputManager.Instance.Info.TouchPoint, out iGridX, out iGridY)) {
 
 						int iSelectSerial = 0;
 						foreach (DataItemParam data_item in DataManager.Instance.m_ItemDataList) {
@@ -183,7 +183,7 @@ public class ParkMainIdle : ParkMainController
 
 			break;
 		case STEP.SWIPE:
-			m_parkMain.goParkRoot.transform.localPosition += new Vector3 (InputManager.Info.SwipeAdd.x, InputManager.Info.SwipeAdd.y, 0.0f);
+			m_parkMain.goParkRoot.transform.localPosition += new Vector3 (InputManager.Instance.Info.SwipeAdd.x, InputManager.Instance.Info.SwipeAdd.y, 0.0f);
 
 			float fMaxX = (DataManager.user.m_iWidth ) * DefineOld.CELL_X_DIR.x;
 			float fMinX = fMaxX * -1.0f;
@@ -205,29 +205,29 @@ public class ParkMainIdle : ParkMainController
 			}
 
 
-			if (InputManager.Info.Swipe == false) {
+			if (InputManager.Instance.Info.Swipe == false) {
 				m_eStep = STEP.IDLE;
 			}
 			break;
 
 		case STEP.PINCH:
 			if (bInit) {
-				m_fPinchValueBase = InputManager.Info.PinchPos.magnitude;
+				m_fPinchValueBase = InputManager.Instance.Info.PinchPos.magnitude;
 				m_fPinchValue = m_fPinchValueBase;
-				//m_fPinchValue = InputManager.Info.PinchDelta;
-				Debug.Log (InputManager.Info.PinchPos);
+				//m_fPinchValue = InputManager.Instance.Info.PinchDelta;
+				Debug.Log (InputManager.Instance.Info.PinchPos);
 
 			}
 
-			//Debug.Log (string.Format ("base={0} now={1} rate={2} ", InputManager.Info.PinchDelta, m_fPinchValue, (InputManager.Info.PinchDelta / m_fPinchValue)));
-			Debug.Log (string.Format ("base={0} now={1} delta={2} rate={3} ", m_fPinchValueBase, m_fPinchValue,InputManager.Info.PinchDelta, (m_fPinchValue / m_fPinchValueBase)));
+			//Debug.Log (string.Format ("base={0} now={1} rate={2} ", InputManager.Instance.Info.PinchDelta, m_fPinchValue, (InputManager.Instance.Info.PinchDelta / m_fPinchValue)));
+			Debug.Log (string.Format ("base={0} now={1} delta={2} rate={3} ", m_fPinchValueBase, m_fPinchValue,InputManager.Instance.Info.PinchDelta, (m_fPinchValue / m_fPinchValueBase)));
 
 			// ここの判定危険かも
-			if (InputManager.Instance.IsPinch () == false && InputManager.Info.TouchUp) {
+			if (InputManager.Instance.IsPinch () == false && InputManager.Instance.Info.TouchUp) {
 				m_eStep = STEP.IDLE;
 			} else {
 
-				m_fPinchValue = InputManager.Info.PinchDelta;
+				m_fPinchValue = InputManager.Instance.Info.PinchDelta;
 				m_fPinchValue *= 0.001f;
 
 				float fRate = GameMain.ParkRoot.myTransform.localScale.x;

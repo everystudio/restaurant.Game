@@ -119,14 +119,14 @@ public class CtrlDispOffice : CtrlItemDetailBase {
 
 	// Update is called once per frame
 	void Update () {
-		if (InputManager.Info.TouchON) {
+		if (InputManager.Instance.Info.TouchON) {
 			int iGridX = 0;
 			int iGridY = 0;
 
 			int iSelectCageSerial = 0;
 
 			if (m_goRootPosition) {
-				if (GameMain.GetGrid (m_goRootPosition, InputManager.Info.TouchPoint, out iGridX, out iGridY)) {
+				if (GameMain.GetGrid (m_goRootPosition, InputManager.Instance.Info.TouchPoint, out iGridX, out iGridY)) {
 					//Debug.Log ("x=" + iGridX.ToString () + " y=" + iGridY.ToString ());
 
 					foreach (DataItemParam data_item_param in DataManager.Instance.m_dataItem.list) {

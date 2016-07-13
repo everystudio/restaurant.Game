@@ -117,7 +117,7 @@ public class ParkMain : PageBase2 {
 				// ここで仕事のチェックしますか
 				DataWork.WorkCheck ();
 			}
-			if (InputManager.Info.TouchON) {
+			if (InputManager.Instance.Info.TouchON) {
 				m_eStep = STEP.IDLE;
 			}
 
