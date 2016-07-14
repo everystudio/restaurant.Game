@@ -1,10 +1,77 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 using System.Collections;
 
 public class MapChipRestaurant : MapChipBase<DataMapChipRestaurantParam> {
 
+	public UnityEvent OnBackyard = new UnityEvent ();
+	public UnityEvent OnFix = new UnityEvent ();
+	public UnityEvent OnBuy = new UnityEvent ();
+
 	//private UtilSwitchSprite m_switchSprite;
 	private UI2DSprite m_sprImage;
+
+	private EditMenuButtonRoot m_editMenuButtonRoot;
+	private CtrlOjisanCheckUgui m_ctrlOjisanCheck;
+
+	private void goBackyard(){
+		OnBackyard.Invoke ();
+		Destroy (m_ctrlOjisanCheck.gameObject);
+		Destroy (gameObject);
+	}
+	private void cancelBackyard(){
+		Destroy (m_ctrlOjisanCheck.gameObject);
+		m_ctrlOjisanCheck = null;
+	}
+
+	private void pushBackyard(){
+		m_ctrlOjisanCheck = PrefabManager.Instance.MakeScript<CtrlOjisanCheckUgui>( "prefab/UguiOjisanCheck" , GameObject.Find("CanvasEdit") );
+		m_ctrlOjisanCheck.Initialize ("バックヤードに移動させますか？");
+		m_ctrlOjisanCheck.m_btnYes.ClickButtonEvent.AddListener (goBackyard);
+		m_ctrlOjisanCheck.m_btnNo.ClickButtonEvent.AddListener (cancelBackyard);
+	}
+
+	public void SetFlip(){
+		Debug.LogError ("flip");
+		if (param.flip == 0) {
+			param.flip = 1;
+		} else {
+			param.flip = 0;
+		}
+		DispFlip (param.flip);
+	}
+
+	public void SetFix(){
+		Debug.LogError ("fix");
+		if (m_bSetAble) {
+			TweenColorAll (gameObject, 0.025f, Color.white);
+			TweenAlphaAll (gameObject, 0.025f, 1.0f);
+			Destroy (m_editMenuButtonRoot.gameObject);
+			OnFix.Invoke ();
+		}
+	}
+
+	public void SetBuy(){
+		Debug.LogError ("buy");
+		OnBuy.Invoke ();
+	}
+
+	public void DispFlip( int _iFlipParam ){
+		if (param.flip == 0) {
+			m_sprImage.flip = UIBasicSprite.Flip.Nothing;
+		} else {
+			m_sprImage.flip = UIBasicSprite.Flip.Horizontally;
+		}
+	}
+
+	public void ShowEditMenu( bool _bMenu ){
+		m_editMenuButtonRoot = PrefabManager.Instance.MakeScript<EditMenuButtonRoot>( "prefab/PrefEditMenuButtonRoot" , gameObject);
+		m_editMenuButtonRoot.m_btnBackyard.ClickButtonEvent.AddListener (pushBackyard);
+		m_editMenuButtonRoot.m_btnFlip.ClickButtonEvent.AddListener (SetFlip);
+		m_editMenuButtonRoot.m_btnFix.ClickButtonEvent.AddListener (SetFix);
+		m_editMenuButtonRoot.m_btnBuy.ClickButtonEvent.AddListener (SetBuy);
+		m_editMenuButtonRoot.transform.localPosition = new Vector3 (0.0f, 200.0f, 0.0f);
+	}
 
 	private void change_sprite( UI2DSprite _spr , string _strName ){
 		string strLoadImage = string.Format ("texture/item/{0}.png", _strName);
@@ -25,6 +92,7 @@ public class MapChipRestaurant : MapChipBase<DataMapChipRestaurantParam> {
 		string strName = "item" + string.Format( "{0:D2}_{1:D2}" , _item_id , 1 );
 		change_sprite (m_sprImage, strName);
 		SetPos (_x, _y);
+		DispFlip (param.flip);
 	}
 
 	public void SetPos( int _iX , int _iY ){
@@ -58,16 +126,6 @@ public class MapChipRestaurant : MapChipBase<DataMapChipRestaurantParam> {
 		*/
 		m_sprImage.depth = iDepth;
 		return;
-	}
-
-	public void SetEditAble( bool _bFlag ){
-		if (_bFlag) {
-			TweenColorAll (gameObject, 0.025f, Color.green);
-			TweenAlphaAll (gameObject, 0.025f, 0.75f);
-		} else {
-			TweenColorAll (gameObject, 0.025f, Color.red);
-			TweenAlphaAll (gameObject, 0.025f, 0.75f);
-		}
 	}
 
 

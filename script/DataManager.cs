@@ -203,7 +203,7 @@ insert into new_table (test_key,test_value) values ('insert_key' , 'insert_value
 	}
 
 	public void DataSave(){
-		#if !UNITY_EDITOR
+		#if UNITY_EDITOR
 		Debug.LogError ("save");
 		#endif
 		m_dataKvs.Save (DataKvs.FILE_NAME);
@@ -212,9 +212,11 @@ insert into new_table (test_key,test_value) values ('insert_key' , 'insert_value
 		m_dataItem.Save (DataItem.FILENAME);
 		dataWork.Save (DataWork.FILENAME);
 
+
 		m_csvItem.Save (CsvItem.FilePath);
 		m_csvMonster.Save (CsvMonster.FilePath);
 		m_csvStaff.Save (CsvStaffData.FilePath);
+		dataMapChipRestaurant.Save (DataMapChipRestaurant.FILENAME);
 
 
 	}
@@ -430,6 +432,7 @@ insert into new_table (test_key,test_value) values ('insert_key' , 'insert_value
 		m_fSymbolRate = fTotalRate;
 		return fTotalRate;
 	}
+
 	public float GetSymbolRate(){
 		if (m_bSymbolRate == false) {
 			UpdateSymbolRate ();
@@ -438,13 +441,12 @@ insert into new_table (test_key,test_value) values ('insert_key' , 'insert_value
 	}
 
 	public string ReviewUrl(){
-
 		string strRet = "https://play.google.com/store/apps/details?id=jp.everystudio.pocket.zoo";
 
 		#if UNITY_ANDROID
 		strRet = "https://play.google.com/store/apps/details?id=jp.everystudio.pocket.zoo";
-		if( config.HasKey( "reviewurl_android")){
-			strRet = config.Read("reviewurl_android");
+		if (config.HasKey ("reviewurl_android")) {
+			strRet = config.Read ("reviewurl_android");
 		}
 		#elif UNITY_IOS
 		strRet = "https://itunes.apple.com/us/app/leshii-fang-zhi-jing-yinggemu/id1112070121?l=ja&ls=1&mt=8";
@@ -456,9 +458,13 @@ insert into new_table (test_key,test_value) values ('insert_key' , 'insert_value
 		return strRet;
 	}
 
+
 	#endregion
+
+
 	public float m_fInterval;
 	public const float EDITOR_SAVE_INTERVAL = 10.0f;
+	public bool m_bDebugSave = false;
 
 	void OnApplicationPause(bool pauseStatus) {
 		///Debug.LogError ("here");
@@ -471,12 +477,20 @@ insert into new_table (test_key,test_value) values ('insert_key' , 'insert_value
 	#if UNITY_EDITOR
 	void Update(){
 
+		if (m_bDebugSave) {
+			m_bDebugSave = false;
+			DataSave ();
+		}
+
+		/*
 		m_fInterval += Time.deltaTime;
 
 		if (EDITOR_SAVE_INTERVAL < m_fInterval) {
 			m_fInterval -= EDITOR_SAVE_INTERVAL;
 			DataSave ();
 		}
+		*/
+
 
 	}
 	#endif

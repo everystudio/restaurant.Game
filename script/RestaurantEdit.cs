@@ -64,6 +64,22 @@ public class RestaurantEdit : RestaurantPageBase {
 	}
 
 
+	#region イベント関数
+	private void onBackyard(){
+		// 参照渡しなので、一応これでDatamanagerの方も変わる。ポインターが使いたいよー
+		m_paramMove.x = -1;
+		m_paramMove.y = -1;
+		m_eStep = STEP.IDLE;
+	}
+	private void onFix(){
+		m_paramMove.x = m_iEditX;
+		m_paramMove.y = m_iEditY;
+		m_eStep = STEP.IDLE;
+	}
+
+	#endregion
+
+
 	// Update is called once per frame
 	void Update () {
 
@@ -80,6 +96,9 @@ public class RestaurantEdit : RestaurantPageBase {
 				m_btnEditYes.TriggerClear ();
 				m_btnEditNo.TriggerClear ();
 				InputManager.Instance.Info.TouchUp = false;
+				foreach (DataMapChipRestaurantParam param in DataManager.Instance.dataMapChipRestaurant.list) {
+					Debug.Log (string.Format ("mapchip_serial={0} x={1} y={2} flip={3}", param.mapchip_serial, param.x, param.y , param.flip));
+				}
 			}
 
 			if (InputManager.Instance.Info.TouchUp) {
@@ -130,6 +149,10 @@ public class RestaurantEdit : RestaurantPageBase {
 					}
 					iRemoveIndex += 1;
 				}
+				m_mapchipRestaurant.ShowEditMenu (true);
+				m_mapchipRestaurant.OnBackyard.AddListener (onBackyard);
+				m_mapchipRestaurant.OnFix.AddListener (onFix);
+
 				//m_mapchipRestaurant.SetEditAble (true);
 			}
 			m_eStep = STEP.MOVE_IDLE;
