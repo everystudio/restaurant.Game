@@ -6,7 +6,7 @@ public class MapChipRestaurant : MapChipBase<DataMapChipRestaurantParam> {
 
 	public UnityEvent OnBackyard = new UnityEvent ();
 	public UnityEvent OnFix = new UnityEvent ();
-	public UnityEvent OnBuy = new UnityEvent ();
+	public UnityEvent OnSell = new UnityEvent ();
 
 	//private UtilSwitchSprite m_switchSprite;
 	private UI2DSprite m_sprImage;
@@ -51,9 +51,9 @@ public class MapChipRestaurant : MapChipBase<DataMapChipRestaurantParam> {
 		}
 	}
 
-	public void SetBuy(){
+	public void SetSell(){
 		Debug.LogError ("buy");
-		OnBuy.Invoke ();
+		OnSell.Invoke ();
 	}
 
 	public void DispFlip( int _iFlipParam ){
@@ -69,7 +69,7 @@ public class MapChipRestaurant : MapChipBase<DataMapChipRestaurantParam> {
 		m_editMenuButtonRoot.m_btnBackyard.ClickButtonEvent.AddListener (pushBackyard);
 		m_editMenuButtonRoot.m_btnFlip.ClickButtonEvent.AddListener (SetFlip);
 		m_editMenuButtonRoot.m_btnFix.ClickButtonEvent.AddListener (SetFix);
-		m_editMenuButtonRoot.m_btnBuy.ClickButtonEvent.AddListener (SetBuy);
+		m_editMenuButtonRoot.m_btnBuy.ClickButtonEvent.AddListener (SetSell);
 		m_editMenuButtonRoot.transform.localPosition = new Vector3 (0.0f, 200.0f, 0.0f);
 	}
 

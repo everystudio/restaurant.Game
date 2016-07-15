@@ -16,12 +16,6 @@ public class RestaurantMain : MonoBehaviour {
 	private STEP m_eStep;
 	private STEP m_eStepPre;
 
-	private List<GameObject> m_canvasList = new List<GameObject> ();
-	[SerializeField]
-	private RestaurantPageBase m_restaurantIdle;
-	[SerializeField]
-	private RestaurantPageBase m_restaurantEdit;
-
 	[SerializeField]
 	private MapRootRestaurant m_maprootRestaurant;
 	[SerializeField]
@@ -30,16 +24,9 @@ public class RestaurantMain : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		// このシーンはここから始まる
-		Debug.Log( "RestaurantMain.Start()" );
 
 		m_eStep = STEP.IDLE;
 		m_eStepPre = STEP.MAX;
-
-		m_restaurantIdle.Initialize (m_maprootRestaurant);
-		m_restaurantEdit.Initialize (m_maprootRestaurant);
-
-		m_canvasList.Add (m_restaurantIdle.gameObject);
-		m_canvasList.Add (m_restaurantEdit.gameObject);
 
 
 		// 画像読み込み
@@ -60,8 +47,6 @@ public class RestaurantMain : MonoBehaviour {
 		SpriteManager.Instance.LoadAtlas ("atlas/ui001");
 		SpriteManager.Instance.LoadAtlas ("atlas/ui002");
 		SpriteManager.Instance.LoadAtlas ("atlas/ui003");
-
-
 
 		/*
 		DataMapChipRestaurant mapchip_sample = new DataMapChipRestaurant ();
@@ -87,27 +72,10 @@ public class RestaurantMain : MonoBehaviour {
 			bInit = true;
 		}
 		switch (m_eStep) {
-
-		case STEP.IDLE:
-			if (bInit) {
-				m_restaurantIdle.PageStart ();
-			}
-			if (m_restaurantIdle.IsEnd ()) {
-				m_restaurantIdle.PageEnd ();
-				m_eStep = STEP.EDIT;
-			}
-			break;
-		case STEP.EDIT:
-			if (bInit) {
-				m_restaurantEdit.PageStart ();
-			}
-			if (m_restaurantEdit.IsEnd ()) {
-				m_restaurantEdit.PageEnd ();
-				m_eStep = STEP.IDLE;
-			}
-			break;
 		case STEP.MAX:
 		default:
+			if (bInit) {
+			}
 			break;
 		}
 	

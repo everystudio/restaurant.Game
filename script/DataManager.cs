@@ -417,6 +417,17 @@ insert into new_table (test_key,test_value) values ('insert_key' , 'insert_value
 		return m_RoadMap.ContainsKey (road_hash);
 	}
 
+	public string MakeItemSpriteName ( int _itemId ){
+		string strName = "item" + string.Format( "{0:D2}_{1:D2}" , _itemId , 1 );
+		return strName;
+	}
+
+	public string MakeItemSpriteNameLoad( int _itemId  ){		
+		string strFileName = MakeItemSpriteName (_itemId);
+		string strLoadImage = string.Format ("texture/item/{0}.png", strFileName);
+		return strLoadImage;
+	}
+
 	public bool m_bSymbolRate;
 	public float m_fSymbolRate;
 	public float UpdateSymbolRate(){
@@ -457,8 +468,6 @@ insert into new_table (test_key,test_value) values ('insert_key' , 'insert_value
 		#endif
 		return strRet;
 	}
-
-
 	#endregion
 
 

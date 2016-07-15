@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -7,21 +8,28 @@ public class RestaurantEdit : RestaurantPageBase {
 	public enum STEP{
 		NONE		= 0,
 		IDLE		,
+
+		// 移動とか
 		MOVE_INIT	,
 		MOVE_IDLE	,
 		MOVE_SWIPE	,
 		MOVE_MAP_SWIPE	,
 		MOVE_SET	,
 		MOVE_END	,
-		SELECTING	,
-		END			,
-		MAX			,
+
+		// バックヤードから呼び出している
+		BACKYARD_INIT		,
+		BACKYARD_SELECTING	,
+		END					,
+		MAX					,
 	}
 	public STEP m_eStep;
 	public STEP m_eStepPre;
 
 	public MapChipRestaurant m_mapchipRestaurant;
 	public DataMapChipRestaurantParam m_paramMove;
+
+	private CtrlBackyardItem m_ctrlBackyardItem;
 
 	public List<MapGrid> m_DontSetGridList = new List<MapGrid> ();
 	public bool m_bSetEditAble;
@@ -34,6 +42,12 @@ public class RestaurantEdit : RestaurantPageBase {
 	private ButtonBase m_btnEditYes;
 	[SerializeField]
 	private ButtonBase m_btnEditNo;
+	[SerializeField]
+	private Button m_btnBackyard;
+
+	void Awake(){
+		m_btnBackyard.onClick.AddListener (onBackyardStart);
+	}
 
 	protected override void initialize ()
 	{
@@ -76,6 +90,12 @@ public class RestaurantEdit : RestaurantPageBase {
 		m_paramMove.y = m_iEditY;
 		m_eStep = STEP.IDLE;
 	}
+	private void onSell(){
+		m_eStep = STEP.IDLE;
+	}
+	public void onBackyardStart(){
+		m_eStep = STEP.BACKYARD_INIT;
+	}
 
 	#endregion
 
@@ -93,12 +113,16 @@ public class RestaurantEdit : RestaurantPageBase {
 		switch (m_eStep) {
 		case STEP.IDLE:
 			if (bInit) {
+				UIAssistant.main.ShowPage ("EditIdle");
 				m_btnEditYes.TriggerClear ();
 				m_btnEditNo.TriggerClear ();
 				InputManager.Instance.Info.TouchUp = false;
+
+				/*
 				foreach (DataMapChipRestaurantParam param in DataManager.Instance.dataMapChipRestaurant.list) {
 					Debug.Log (string.Format ("mapchip_serial={0} x={1} y={2} flip={3}", param.mapchip_serial, param.x, param.y , param.flip));
 				}
+				*/
 			}
 
 			if (InputManager.Instance.Info.TouchUp) {
@@ -231,6 +255,19 @@ public class RestaurantEdit : RestaurantPageBase {
 
 		case STEP.END:
 			break;
+
+		case STEP.BACKYARD_INIT:
+			if (bInit) {
+				UIAssistant.main.ShowPage ("EditBackyard");
+			}
+			m_eStep = STEP.BACKYARD_SELECTING;
+			break;
+
+		case STEP.BACKYARD_SELECTING:
+			
+			break;
+
+
 		case STEP.MAX:
 		default:
 			break;
