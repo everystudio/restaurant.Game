@@ -23,7 +23,7 @@ public class DataMapChipRestaurant : DataMapChipBase<DataMapChipRestaurantParam>
 	public List<DataMapChipRestaurantParam> GetActiveList (){
 		List<DataMapChipRestaurantParam> ret = new List<DataMapChipRestaurantParam> ();
 		foreach (DataMapChipRestaurantParam param in list) {
-			if (0 < param.x) {
+			if (0 <= param.x) {
 				ret.Add (param);
 			}
 		}

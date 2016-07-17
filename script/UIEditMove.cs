@@ -39,10 +39,9 @@ public class UIEditMove : CPanel {
 
 	protected override void panelStart ()
 	{
-
-		Debug.LogError (UIParam.Instance.m_iEditMapChipSerial);
+		//Debug.LogError ( string.Format("UIEditMove.panelStart:{0}" ,UIParam.Instance.m_iEditMapChipSerial));
 		if (UIParam.Instance.m_iEditMapChipSerial == 0) {
-			Debug.LogError ("here");
+			//Debug.LogError ("here");
 			UIAssistant.main.ShowPage ("EditIdle");
 			return;
 		}
@@ -59,6 +58,7 @@ public class UIEditMove : CPanel {
 
 	protected override void panelEndStart ()
 	{
+		//Debug.LogError ("panelEndStart");
 		base.panelEndStart ();
 
 		if (m_mapchipRestaurant != null) {
@@ -78,13 +78,17 @@ public class UIEditMove : CPanel {
 	}
 
 	private void onFix(){
+		//Debug.LogError (string.Format ("onFix:{0}", gameObject.name));
 		m_paramMove.x = m_iEditX;
 		m_paramMove.y = m_iEditY;
-
-		RestaurantMain.Instance.mapRoot.AddFieldItem (m_mapchipRestaurant);
-		m_mapchipRestaurant = null;
-		UIAssistant.main.ShowPage ("EditIdle");
-		UIParam.Instance.m_iEditMapChipSerial = 0;
+		if (m_mapchipRestaurant != null) {
+			// なんか知らんけど2回呼ばれる
+			RestaurantMain.Instance.mapRoot.AddFieldItem (m_mapchipRestaurant);
+			m_mapchipRestaurant = null;
+			UIAssistant.main.ShowPage ("EditIdle");
+			UIParam.Instance.m_iEditMapChipSerial = 0;
+			//Debug.LogError ("null:m_mapchipRestaurant");
+		}
 	}
 
 	private void onSell(){

@@ -42,7 +42,7 @@ public class MapChipRestaurant : MapChipBase<DataMapChipRestaurantParam> {
 	}
 
 	public void SetFix(){
-		//Debug.LogError ("fix");
+		//Debug.LogError ("fix MapChipRestaurant");
 		if (m_bSetAble) {
 			TweenColorAll (gameObject, 0.025f, Color.white);
 			TweenAlphaAll (gameObject, 0.025f, 1.0f);

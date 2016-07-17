@@ -205,7 +205,8 @@ public class DataManager : DataManagerBase <DataManager>{
 
 
 	}
-
+	public string[] test = new string[30];
+	public string[] test2 = new string[30];
 
 	public void DummyCall(){
 		return;

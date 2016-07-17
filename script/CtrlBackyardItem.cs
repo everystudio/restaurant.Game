@@ -6,7 +6,7 @@ using System.Collections.Generic;
 public class CtrlBackyardItem : MonoBehaviourEx {
 
 	public void MapChipSelected( int _iMapChipSerial ){
-		Debug.LogError( string.Format("selected mapchipserial = {0}" , _iMapChipSerial ));
+		//Debug.LogError( string.Format("selected mapchipserial = {0}" , _iMapChipSerial ));
 
 		UIParam.Instance.m_iEditMapChipSerial = _iMapChipSerial;
 		UIAssistant.main.ShowPage( "EditMove" );

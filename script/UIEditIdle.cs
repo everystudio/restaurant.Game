@@ -16,6 +16,8 @@ public class UIEditIdle : CPanel {
 		//Debug.LogError ("UIEditIdle:panelStart");
 		InputManager.Instance.Info.TouchUp = false;
 
+		UIAssistant.main.SetPrevPage ("MainIdle");
+
 	}
 
 	protected override void panelEndStart ()
@@ -30,7 +32,7 @@ public class UIEditIdle : CPanel {
 			int iGridY = 0;
 
 			if (mapRoot.GetGrid (InputManager.Instance.Info.TouchPoint, out iGridX, out iGridY)) {
-				Debug.Log (string.Format ("grid({0},{1})", iGridX, iGridY));
+				//Debug.Log (string.Format ("grid({0},{1})", iGridX, iGridY));
 
 				if (DataManager.Instance.dataMapChipRestaurant.GetExist (iGridX, iGridY, out m_paramMove)) {
 					UIParam.Instance.m_iEditMapChipSerial = m_paramMove.mapchip_serial;
