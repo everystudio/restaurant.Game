@@ -4,7 +4,6 @@ using System.Collections;
 public class MenuButtonEdit : ButtonBase {
 
 	private void pushedMenuEdit(){
-		Debug.Log ("pushedMenuEdit");
 		UIAssistant.main.ShowPage ("EditIdle");
 	}
 

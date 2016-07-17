@@ -52,20 +52,6 @@ public class DataManager : DataManagerBase <DataManager>{
 	public readonly int DEPTH_MONSTER	= 1500;
 	public readonly int DEPTH_MONSTER_FUKIDASHI	= 2000;
 
-
-	/*
-	 * 
-
-DROP TABLE IF EXISTS (new_table);
-CREATE TABLE new_table (
-  test_key VARCHAR(255) NOT NULL,
-  test_value text NOT NULL,
-  PRIMARY KEY(test_key)
-);
-
-
-insert into new_table (test_key,test_value) values ('insert_key' , 'insert_value');
-	*/
 	IEnumerator send( string _filename , string _key ,string _strTime  ){
 		string strScreenShotURL= "http://every-studio.com/html/test.php";
 		//string strScreenShotURL= "http://every-studio.com/html/test.php?test_key={0}{1}&test_value={2}";
@@ -211,7 +197,6 @@ insert into new_table (test_key,test_value) values ('insert_key' , 'insert_value
 		dataStaff.Save (DataStaff.FILENAME);
 		m_dataItem.Save (DataItem.FILENAME);
 		dataWork.Save (DataWork.FILENAME);
-
 
 		m_csvItem.Save (CsvItem.FilePath);
 		m_csvMonster.Save (CsvMonster.FilePath);
@@ -380,6 +365,7 @@ insert into new_table (test_key,test_value) values ('insert_key' , 'insert_value
 			return Instance.m_csvLocalNotification.All;
 		}
 	}
+	#endregion
 
 	public CtrlHelp.ACTION_TYPE GetHelpActionType(){
 
@@ -468,7 +454,8 @@ insert into new_table (test_key,test_value) values ('insert_key' , 'insert_value
 		#endif
 		return strRet;
 	}
-	#endregion
+
+
 
 
 	public float m_fInterval;

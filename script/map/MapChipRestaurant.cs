@@ -25,14 +25,14 @@ public class MapChipRestaurant : MapChipBase<DataMapChipRestaurantParam> {
 	}
 
 	private void pushBackyard(){
-		m_ctrlOjisanCheck = PrefabManager.Instance.MakeScript<CtrlOjisanCheckUgui>( "prefab/UguiOjisanCheck" , GameObject.Find("CanvasEdit") );
+		m_ctrlOjisanCheck = PrefabManager.Instance.MakeScript<CtrlOjisanCheckUgui>( "prefab/UguiOjisanCheck" , GameObject.Find("UIEditMove") );
 		m_ctrlOjisanCheck.Initialize ("バックヤードに移動させますか？");
 		m_ctrlOjisanCheck.m_btnYes.ClickButtonEvent.AddListener (goBackyard);
 		m_ctrlOjisanCheck.m_btnNo.ClickButtonEvent.AddListener (cancelBackyard);
 	}
 
 	public void SetFlip(){
-		Debug.LogError ("flip");
+		//Debug.LogError ("flip");
 		if (param.flip == 0) {
 			param.flip = 1;
 		} else {
@@ -42,7 +42,7 @@ public class MapChipRestaurant : MapChipBase<DataMapChipRestaurantParam> {
 	}
 
 	public void SetFix(){
-		Debug.LogError ("fix");
+		//Debug.LogError ("fix");
 		if (m_bSetAble) {
 			TweenColorAll (gameObject, 0.025f, Color.white);
 			TweenAlphaAll (gameObject, 0.025f, 1.0f);
@@ -52,7 +52,7 @@ public class MapChipRestaurant : MapChipBase<DataMapChipRestaurantParam> {
 	}
 
 	public void SetSell(){
-		Debug.LogError ("buy");
+		//Debug.LogError ("buy");
 		OnSell.Invoke ();
 	}
 

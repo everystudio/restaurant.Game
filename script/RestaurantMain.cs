@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class RestaurantMain : MonoBehaviour {
+public class RestaurantMain : Singleton<RestaurantMain> {
 
 	public enum STEP
 	{
@@ -18,12 +18,20 @@ public class RestaurantMain : MonoBehaviour {
 
 	[SerializeField]
 	private MapRootRestaurant m_maprootRestaurant;
+	public MapRootRestaurant mapRoot{
+		get {
+			return m_maprootRestaurant;
+		}
+	}
+
 	[SerializeField]
 	private Camera m_setCamera;
 
 	// Use this for initialization
 	void Start () {
 		// このシーンはここから始まる
+
+		UIParam.Instance.Reset ();
 
 		m_eStep = STEP.IDLE;
 		m_eStepPre = STEP.MAX;
@@ -61,7 +69,7 @@ public class RestaurantMain : MonoBehaviour {
 		}
 
 		m_maprootRestaurant.Initialize (param_list,"data/mapdata_restaurant" , m_setCamera );
-	
+
 	}
 	
 	// Update is called once per frame
