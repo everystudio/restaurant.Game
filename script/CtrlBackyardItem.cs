@@ -19,9 +19,9 @@ public class CtrlBackyardItem : MonoBehaviourEx {
 
 	public void Initialize ()
 	{
-		List<DataMapChipRestaurantParam> list = DataManager.Instance.dataMapChipRestaurant.list;
+		List<DataMapchipParam> list = DataManager.Instance.dataMapchip.list;
 
-		foreach (DataMapChipRestaurantParam param in list) {
+		foreach (DataMapchipParam param in list) {
 			if (param.x < 0) {
 				EditSelectMapChip script = PrefabManager.Instance.MakeScript<EditSelectMapChip> ("prefab/EditSelectMapchip", m_objContent);
 				script.Initialize (param);

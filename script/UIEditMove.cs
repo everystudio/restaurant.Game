@@ -28,7 +28,7 @@ public class UIEditMove : CPanel {
 
 	private CtrlBackyardItem m_ctrlBackyardItem;
 	public MapChipRestaurant m_mapchipRestaurant;
-	public DataMapChipRestaurantParam m_paramMove;
+	public DataMapchipParam m_paramMove;
 
 	public List<MapGrid> m_DontSetGridList = new List<MapGrid> ();
 	public bool m_bSetEditAble;
@@ -48,7 +48,7 @@ public class UIEditMove : CPanel {
 
 		m_eStep = STEP.MOVE_INIT;
 		m_eStepPre = STEP.MAX;
-		foreach (DataMapChipRestaurantParam param in DataManager.Instance.dataMapChipRestaurant.list) {
+		foreach (DataMapchipParam param in DataManager.Instance.dataMapchip.list) {
 			if (param.mapchip_serial == UIParam.Instance.m_iEditMapChipSerial) {
 				m_paramMove = param;
 			}
@@ -118,7 +118,7 @@ public class UIEditMove : CPanel {
 
 				List<int> iSerialList = new List<int> ();
 				iSerialList.Add (m_paramMove.mapchip_serial);
-				MapGrid.SetUsingGrid (ref m_DontSetGridList, DataManager.Instance.dataMapChipRestaurant.GetActiveList (), iSerialList);
+				MapGrid.SetUsingGrid (ref m_DontSetGridList, DataManager.Instance.dataMapchip.GetActiveList (), iSerialList);
 				//Debug.LogError (m_paramMove.mapchip_serial);
 				//Debug.LogError (mapRoot.m_mapchipList.Count);
 

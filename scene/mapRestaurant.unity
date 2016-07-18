@@ -755,7 +755,8 @@ Prefab:
       propertyPath: m_HorizontalScrollbarVisibility
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 11404640, guid: 22bbd8e32a3f98d46816c19e5321beda, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 22bbd8e32a3f98d46816c19e5321beda, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &379626557
@@ -2034,6 +2035,10 @@ RectTransform:
   m_AnchoredPosition: {x: -65.2, y: 86.9}
   m_SizeDelta: {x: 78, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1627745470 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 132252, guid: 22bbd8e32a3f98d46816c19e5321beda, type: 2}
+  m_PrefabInternal: {fileID: 340925645}
 --- !u!1 &1686771810
 GameObject:
   m_ObjectHideFlags: 0
@@ -2218,6 +2223,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa336b70b6b862f44945f9aed3b5c983, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_objContent: {fileID: 1627745470}
 --- !u!1 &1746372806
 GameObject:
   m_ObjectHideFlags: 0

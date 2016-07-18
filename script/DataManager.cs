@@ -161,7 +161,8 @@ public class DataManager : DataManagerBase <DataManager>{
 		}
 		return;
 	}
-
+	public List<string> strTest = new List<string> ();
+	public List<string> strTest2 = new List<string> ();
 	public void AllLoad(){
 		config.Load (CsvConfig.FILE_NAME);
 		kvs_data.Load( DataKvs.FILE_NAME );
@@ -172,7 +173,17 @@ public class DataManager : DataManagerBase <DataManager>{
 		//Debug.LogError ("here");
 		m_dataItem.Load (DataItem.FILENAME);
 
-		dataMapChipRestaurant.Load (DataMapChipRestaurant.FILENAME);
+
+		dataMapchip.LoadMulti (DataMapchip.FILENAME);
+
+		masterItem.LoadMulti (MasterItem.FILENAME);
+		masterMapchip.LoadMulti (MasterMapchip.FILENAME);
+		masterShop.LoadMulti (MasterShop.FILENAME , masterItem.list);
+		//Debug.LogError (masterShop.list.Count);
+		foreach (MasterShopParam param in masterShop.list) {
+			strTest.Add (param.item_id.ToString());
+			strTest2.Add (param.category);
+		}
 		m_csvItemDetail.Load ();
 
 		//m_csvWork.Load ();
@@ -201,12 +212,9 @@ public class DataManager : DataManagerBase <DataManager>{
 		m_csvItem.Save (CsvItem.FilePath);
 		m_csvMonster.Save (CsvMonster.FilePath);
 		m_csvStaff.Save (CsvStaffData.FilePath);
-		dataMapChipRestaurant.Save (DataMapChipRestaurant.FILENAME);
 
-
+		dataMapchip.Save (DataMapchip.FILENAME);
 	}
-	public string[] test = new string[30];
-	public string[] test2 = new string[30];
 
 	public void DummyCall(){
 		return;
@@ -308,8 +316,12 @@ public class DataManager : DataManagerBase <DataManager>{
 	public DataMonster dataMonster = new DataMonster ();
 	public DataStaff dataStaff= new DataStaff();
 
-
-	public DataMapChipRestaurant dataMapChipRestaurant = new DataMapChipRestaurant();
+	#region データ関連（一応ここに集約ポケット系は消したい）
+	public DataMapchip dataMapchip = new DataMapchip();
+	public MasterItem masterItem = new MasterItem();
+	public MasterMapchip masterMapchip = new MasterMapchip();
+	public MasterShop masterShop = new MasterShop();
+	#endregion
 
 	public CsvStaffData m_csvStaff = new CsvStaffData();
 	static public List<CsvStaffParam> csv_staff {

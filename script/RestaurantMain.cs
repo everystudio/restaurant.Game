@@ -62,8 +62,8 @@ public class RestaurantMain : Singleton<RestaurantMain> {
 		List<DataMapChipRestaurantParam> param_list = mapchip_sample.list;
 		*/
 
-		List<DataMapChipRestaurantParam> param_list = new List<DataMapChipRestaurantParam> ();
-		foreach (DataMapChipRestaurantParam param in DataManager.Instance.dataMapChipRestaurant.list) {
+		List<DataMapchipParam> param_list = new List<DataMapchipParam> ();
+		foreach (DataMapchipParam param in DataManager.Instance.dataMapchip.list) {
 			// ここで条件を追加する
 			param_list.Add (param);
 		}

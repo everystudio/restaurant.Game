@@ -2,7 +2,7 @@
 using UnityEngine.Events;
 using System.Collections;
 
-public class MapChipRestaurant : MapChipBase<DataMapChipRestaurantParam> {
+public class MapChipRestaurant : MapChipBase<DataMapchipParam> {
 
 	public UnityEvent OnBackyard = new UnityEvent ();
 	public UnityEvent OnFix = new UnityEvent ();

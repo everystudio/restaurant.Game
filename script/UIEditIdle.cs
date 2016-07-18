@@ -3,7 +3,7 @@ using System.Collections;
 
 public class UIEditIdle : CPanel {
 
-	private DataMapChipRestaurantParam m_paramMove;
+	private DataMapchipParam m_paramMove;
 
 	private MapRootRestaurant mapRoot {
 		get{
@@ -34,7 +34,7 @@ public class UIEditIdle : CPanel {
 			if (mapRoot.GetGrid (InputManager.Instance.Info.TouchPoint, out iGridX, out iGridY)) {
 				//Debug.Log (string.Format ("grid({0},{1})", iGridX, iGridY));
 
-				if (DataManager.Instance.dataMapChipRestaurant.GetExist (iGridX, iGridY, out m_paramMove)) {
+				if (DataManager.Instance.dataMapchip.GetExist (iGridX, iGridY, out m_paramMove)) {
 					UIParam.Instance.m_iEditMapChipSerial = m_paramMove.mapchip_serial;
 					UIAssistant.main.ShowPage ("EditMove");
 				}

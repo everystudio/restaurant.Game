@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 [System.Serializable]
-public class DataMapChipRestaurantParam : DataMapChipBaseParam{
+public class DataMapchipParam : DataMapchipBaseParam{
 
 	public int m_sample_int;
 	public float m_sample_float;
@@ -17,12 +17,12 @@ public class DataMapChipRestaurantParam : DataMapChipBaseParam{
 }
 
 
-public class DataMapChipRestaurant : DataMapChipBase<DataMapChipRestaurantParam> {
+public class DataMapchip : DataMapchipBase<DataMapchipParam> {
 	public const string FILENAME = "data/mapchip_restaurant";
 
-	public List<DataMapChipRestaurantParam> GetActiveList (){
-		List<DataMapChipRestaurantParam> ret = new List<DataMapChipRestaurantParam> ();
-		foreach (DataMapChipRestaurantParam param in list) {
+	public List<DataMapchipParam> GetActiveList (){
+		List<DataMapchipParam> ret = new List<DataMapchipParam> ();
+		foreach (DataMapchipParam param in list) {
 			if (0 <= param.x) {
 				ret.Add (param);
 			}

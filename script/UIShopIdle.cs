@@ -9,6 +9,9 @@ public class UIShopIdle : CPanel {
 	protected override void panelStart ()
 	{
 		base.panelStart ();
+
+		m_ctrlShopList.Initialize ("furniture", "table");
+
 	}
 
 

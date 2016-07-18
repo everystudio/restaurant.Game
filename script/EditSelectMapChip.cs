@@ -18,9 +18,9 @@ public class EditSelectMapChip : MonoBehaviourEx {
 	[SerializeField]
 	private Text m_txtNum;
 
-	DataMapChipRestaurantParam m_param;
+	DataMapchipParam m_param;
 
-	public void Initialize( DataMapChipRestaurantParam _param ){
+	public void Initialize( DataMapchipParam _param ){
 		m_param = _param;
 		m_txtCapacity.text = "";
 		m_txtNum.text = "";

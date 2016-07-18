@@ -27,7 +27,7 @@ public class RestaurantEdit : RestaurantPageBase {
 	public STEP m_eStepPre;
 
 	public MapChipRestaurant m_mapchipRestaurant;
-	public DataMapChipRestaurantParam m_paramMove;
+	public DataMapchipParam m_paramMove;
 
 	private CtrlBackyardItem m_ctrlBackyardItem;
 
@@ -133,7 +133,7 @@ public class RestaurantEdit : RestaurantPageBase {
 				if (mapRoot.GetGrid (InputManager.Instance.Info.TouchPoint, out iGridX, out iGridY)) {
 					Debug.Log (string.Format ("grid({0},{1})", iGridX, iGridY));
 
-					if (DataManager.Instance.dataMapChipRestaurant.GetExist (iGridX, iGridY, out m_paramMove)) {
+					if (DataManager.Instance.dataMapchip.GetExist (iGridX, iGridY, out m_paramMove)) {
 						Debug.LogError (m_paramMove.sample_string);
 						m_eStep = STEP.MOVE_INIT;
 					}
@@ -157,7 +157,7 @@ public class RestaurantEdit : RestaurantPageBase {
 
 				List<int> iSerialList = new List<int> ();
 				iSerialList.Add (m_paramMove.mapchip_serial);
-				MapGrid.SetUsingGrid (ref m_DontSetGridList, DataManager.Instance.dataMapChipRestaurant.GetActiveList (),iSerialList );
+				MapGrid.SetUsingGrid (ref m_DontSetGridList, DataManager.Instance.dataMapchip.GetActiveList (),iSerialList );
 
 				int iRemoveIndex = 0;
 				foreach (MapChipRestaurant mapchip in mapRoot.m_mapchipList) {

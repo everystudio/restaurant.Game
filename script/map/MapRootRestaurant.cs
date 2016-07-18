@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class MapRootRestaurant : MapRootBase<MapChipRestaurant,DataMapChipRestaurantParam> {
+public class MapRootRestaurant : MapRootBase<MapChipRestaurant,DataMapchipParam> {
 
 	public void SetLockSwipeMove(bool _bLock){
 		m_bLockSwipeMove = _bLock;
