@@ -21,7 +21,7 @@ public class CtrlShopList : MonoBehaviourEx {
 		foreach (MasterShopParam param in DataManager.Instance.masterShop.list) {
 			//Debug.LogError (string.Format ("{0}={1} && {2}={3}", param.category, _strCategory, param.type, _strType));
 			if( param.category.Equals( _strCategory ) && param.type.Equals( _strType )){
-				EditSelectMapChip script = PrefabManager.Instance.MakeScript<EditSelectMapChip> ("prefab/EditSelectMapchip", m_objContent);
+				EditSelectMapChip script = PrefabManager.Instance.MakeScript<EditSelectMapChip> ("prefab/ShopIconTall", m_objContent);
 				m_objList.Add (script.gameObject);
 			}
 		}
