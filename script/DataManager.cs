@@ -151,9 +151,6 @@ public class DataManager : DataManagerBase <DataManager>{
 			PlayerPrefs.SetInt (DefineOld.USER_HEIGHT, DefineOld.DEFUALT_USER_WIDTH);
 		}
 
-		//int iWidth = PlayerPrefs.GetInt (DefineOld.USER_WIDTH);
-		//int iHeight= PlayerPrefs.GetInt (DefineOld.USER_HEIGHT);
-
 		//m_tDataUser.Initialize (iWidth,iHeight);
 		AllLoad();
 		foreach( CsvLocalNotificationParam param in csv_localNotification ){
@@ -161,8 +158,6 @@ public class DataManager : DataManagerBase <DataManager>{
 		}
 		return;
 	}
-	public List<string> strTest = new List<string> ();
-	public List<string> strTest2 = new List<string> ();
 	public void AllLoad(){
 		config.Load (CsvConfig.FILE_NAME);
 		kvs_data.Load( DataKvs.FILE_NAME );
@@ -179,11 +174,7 @@ public class DataManager : DataManagerBase <DataManager>{
 		masterItem.LoadMulti (MasterItem.FILENAME);
 		masterMapchip.LoadMulti (MasterMapchip.FILENAME);
 		masterShop.LoadMulti (MasterShop.FILENAME , masterItem.list);
-		//Debug.LogError (masterShop.list.Count);
-		foreach (MasterShopParam param in masterShop.list) {
-			strTest.Add (param.item_id.ToString());
-			strTest2.Add (param.category);
-		}
+		Debug.LogError (masterMapchip.list.Count);
 		m_csvItemDetail.Load ();
 
 		//m_csvWork.Load ();
@@ -450,6 +441,15 @@ public class DataManager : DataManagerBase <DataManager>{
 		return m_fSymbolRate;
 	}
 
+	public enum USER_PARAM{
+		NONE		= 0,
+		COIN		,		// コイン
+		TICKET		,		// チケット
+		POPULARITY	,		// 人気
+
+		MAX			,
+	}
+
 	public string ReviewUrl(){
 		string strRet = "https://play.google.com/store/apps/details?id=jp.everystudio.pocket.zoo";
 
@@ -468,9 +468,6 @@ public class DataManager : DataManagerBase <DataManager>{
 		return strRet;
 	}
 
-
-
-
 	public float m_fInterval;
 	public const float EDITOR_SAVE_INTERVAL = 10.0f;
 	public bool m_bDebugSave = false;
@@ -485,6 +482,8 @@ public class DataManager : DataManagerBase <DataManager>{
 	}
 	#if UNITY_EDITOR
 	void Update(){
+
+		user.AddCoin (1);
 
 		if (m_bDebugSave) {
 			m_bDebugSave = false;

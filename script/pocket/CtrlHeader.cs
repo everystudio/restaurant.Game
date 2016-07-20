@@ -56,7 +56,7 @@ public class CtrlHeader : MonoBehaviour {
 		m_numShojikin.InitializeNumberOnly (DataManager.Instance.kvs_data.ReadInt(DefineOld.USER_SYOJIKIN));
 		m_numTicket.InitializeNumberOnly (DataManager.Instance.kvs_data.ReadInt(DefineOld.USER_TICKET));
 
-		DataManager.user.ParamUpdate ();
+		//DataManager.user.ParamUpdate ();
 
 		/*
 		m_numLevel.InitializeNumberOnly (DataManager.Instance.kvs_data.ReadInt(DefineOld.USER_LEVEL));

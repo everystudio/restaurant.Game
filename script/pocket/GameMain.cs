@@ -148,9 +148,9 @@ public class GameMain : MonoBehaviour {
 		UnityAdsSupporter.Instance.Initialize (strUnityAdsAppId);
 
 		if (m_bInitialized == false) {
-			int iWidth = PlayerPrefs.GetInt (DefineOld.USER_WIDTH);
-			int iHeight= PlayerPrefs.GetInt (DefineOld.USER_HEIGHT);
-			DataManager.user.Initialize (iWidth, iHeight);
+			//int iWidth = PlayerPrefs.GetInt (DefineOld.USER_WIDTH);
+			//int iHeight= PlayerPrefs.GetInt (DefineOld.USER_HEIGHT);
+			//DataManager.user.Initialize (iWidth, iHeight);
 
 			foreach (PageBase2 page in m_PageList) {
 				page.Close ();
