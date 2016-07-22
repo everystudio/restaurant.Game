@@ -185,7 +185,7 @@ public class ParkMainIdle : ParkMainController
 		case STEP.SWIPE:
 			m_parkMain.goParkRoot.transform.localPosition += new Vector3 (InputManager.Instance.Info.SwipeAdd.x, InputManager.Instance.Info.SwipeAdd.y, 0.0f);
 
-			float fMaxX = (DataManager.user.m_iWidth ) * DefineOld.CELL_X_DIR.x;
+			float fMaxX = (DataManager.Instance.user.m_iWidth ) * DefineOld.CELL_X_DIR.x;
 			float fMinX = fMaxX * -1.0f;
 
 			if (m_parkMain.goParkRoot.transform.localPosition.x < fMinX) {
@@ -196,7 +196,7 @@ public class ParkMainIdle : ParkMainController
 			}
 
 			float fMaxY = 0.0f;
-			float fMinY = (DataManager.user.m_iHeight*2) * DefineOld.CELL_X_DIR.y * -1.0f;
+			float fMinY = (DataManager.Instance.user.m_iHeight*2) * DefineOld.CELL_X_DIR.y * -1.0f;
 			if (m_parkMain.goParkRoot.transform.localPosition.y < fMinY) {
 				m_parkMain.goParkRoot.transform.localPosition = new Vector3 (m_parkMain.goParkRoot.transform.localPosition.x, fMinY , m_parkMain.goParkRoot.transform.localPosition.z);
 			} else if (fMaxY < m_parkMain.goParkRoot.transform.localPosition.y) {
@@ -268,7 +268,7 @@ public class ParkMainIdle : ParkMainController
 				int iNeedTicket = RequireTicketNum (m_iNokoriTime);
 				m_itemCheck.Initialize ( m_selectItem.item_id , string.Format ("この施設は完成まで\n{0}です\n\nチケット{1}枚で\nすぐに完成します。", strNokoriTime, iNeedTicket));
 
-				if (DataManager.user.m_iTicket < iNeedTicket) {
+				if (DataManager.Instance.user.m_iTicket < iNeedTicket) {
 					m_itemCheck.YesOrNo.EnableButtonYes (false);
 				}
 			}
@@ -293,7 +293,7 @@ public class ParkMainIdle : ParkMainController
 			dict.Add ("create_time", "\""+ TimeManager.StrGetTime(-1*csv_item_data.production_time) + "\""); 
 
 			DataManager.Instance.m_dataItem.Update (m_selectItem.item_serial, dict);
-			DataManager.user.AddTicket (-1 * RequireTicketNum (m_iNokoriTime));
+			DataManager.Instance.user.AddTicket (-1 * RequireTicketNum (m_iNokoriTime));
 
 			// 仕事の確認
 			DataWork.WorkCheck ();

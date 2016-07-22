@@ -155,7 +155,7 @@ public class ParkMainSettingItem : ParkMainController {
 
 		// お金が足りる
 		// 実際には道路しかひっかからないはず
-		if (m_editItemMaster.need_coin <= DataManager.user.m_iGold) {
+		if (m_editItemMaster.need_coin <= DataManager.Instance.user.m_iGold) {
 			bBuyAble = true;
 			;//OK
 		} else {
@@ -367,9 +367,9 @@ public class ParkMainSettingItem : ParkMainController {
 
 				CsvItemParam item_data = DataManager.GetItem (m_editItemMaster.item_id);
 				if (0 < item_data.need_coin) {
-					DataManager.user.AddGold (-1 * item_data.need_coin);
+					DataManager.Instance.user.AddGold (-1 * item_data.need_coin);
 				} else if (0 < item_data.need_ticket) {
-					DataManager.user.AddTicket (-1 * item_data.need_ticket); 
+					DataManager.Instance.user.AddTicket (-1 * item_data.need_ticket); 
 				} else {
 					;// エラーちゃう？
 					// 課金アイテム

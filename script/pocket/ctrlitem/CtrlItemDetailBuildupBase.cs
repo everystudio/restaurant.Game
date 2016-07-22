@@ -117,7 +117,7 @@ abstract public class CtrlItemDetailBuildupBase : CtrlItemDetailBase {
 		switch (m_eStep) {
 		case STEP.IDLE:
 			if (bInit) {
-				Debug.Log (DataManager.user.m_iGold);
+				Debug.Log (DataManager.Instance.user.m_iGold);
 				m_btnBuildup.TriggerClear ();
 			}
 			if (m_btnBuildup.ButtonPushed || GameMain.Instance.TutorialBuildup) {
@@ -125,7 +125,7 @@ abstract public class CtrlItemDetailBuildupBase : CtrlItemDetailBase {
 				SoundManager.Instance.PlaySE (SoundName.BUTTON_PUSH , "https://s3-ap-northeast-1.amazonaws.com/every-studio/app/sound/se");
 				// お金が足りるなら確認
 
-				if (m_dataNext.coin <= DataManager.user.m_iGold || GameMain.Instance.TutorialBuildup) {
+				if (m_dataNext.coin <= DataManager.Instance.user.m_iGold || GameMain.Instance.TutorialBuildup) {
 					GameMain.Instance.TutorialBuildup = false;
 					m_eStep = STEP.CHECK_BUILDUP;
 				} else {
@@ -139,7 +139,7 @@ abstract public class CtrlItemDetailBuildupBase : CtrlItemDetailBase {
 				GameObject objOjisan = PrefabManager.Instance.MakeObject ("prefab/PrefOjisanCheck", gameObject.transform.parent.parent.gameObject);
 				m_ojisanCheck = objOjisan.GetComponent<CtrlOjisanCheck> ();
 				string strDisp = "";
-				strDisp = string.Format("本当に増強しますか\n\n{0}G → [FFD900]{1}[-]G\n" , DataManager.user.m_iGold , DataManager.user.m_iGold - m_dataNext.coin);
+				strDisp = string.Format("本当に増強しますか\n\n{0}G → [FFD900]{1}[-]G\n" , DataManager.Instance.user.m_iGold , DataManager.Instance.user.m_iGold - m_dataNext.coin);
 				m_ojisanCheck.Initialize (strDisp);
 			}
 			if (m_ojisanCheck.IsYes ()) {
@@ -159,7 +159,7 @@ abstract public class CtrlItemDetailBuildupBase : CtrlItemDetailBase {
 				GameObject objOjisan = PrefabManager.Instance.MakeObject ("prefab/PrefOjisanCheck", gameObject.transform.parent.parent.gameObject);
 				m_ojisanCheck = objOjisan.GetComponent<CtrlOjisanCheck> ();
 				string strDisp = "";
-				strDisp = string.Format("増強費用は\n[FFD900]{0}G[-]必要です\n\n[FFD900]{1}G[-]不足しています" , m_dataNext.coin , m_dataNext.coin - DataManager.user.m_iGold);
+				strDisp = string.Format("増強費用は\n[FFD900]{0}G[-]必要です\n\n[FFD900]{1}G[-]不足しています" , m_dataNext.coin , m_dataNext.coin - DataManager.Instance.user.m_iGold);
 				m_ojisanCheck.Initialize (strDisp, true);
 			}
 			if (m_ojisanCheck.IsYes ()) {
@@ -173,10 +173,10 @@ abstract public class CtrlItemDetailBuildupBase : CtrlItemDetailBase {
 			if( true ){
 
 				// 増強費用
-				DataManager.user.AddGold (m_dataNext.coin * -1);
+				DataManager.Instance.user.AddGold (m_dataNext.coin * -1);
 
 				// 経験値獲得
-				DataManager.user.AddExp (m_dataNext.get_exp);
+				DataManager.Instance.user.AddExp (m_dataNext.get_exp);
 				buildup ();
 			}
 

@@ -72,7 +72,7 @@ public class BannerItem : BannerBase {
 		// 上限確認の為にここで所持数チェック
 		int iHave = DataManager.Instance.m_dataItem.Select (string.Format (" item_id = {0} ", _data.item_id)).Count;
 
-		m_bAbleUse = DataManager.user.AbleBuy (_data.need_coin, _data.need_ticket, 0 , _iCostNokori , iHave , _data.setting_limit ,ref m_eReason);
+		m_bAbleUse = DataManager.Instance.user.AbleBuy (_data.need_coin, _data.need_ticket, 0 , _iCostNokori , iHave , _data.setting_limit ,ref m_eReason);
 		SetReasonSprite (m_sprReason, m_eReason);
 		m_sprIgnoreBlack.gameObject.SetActive (!m_bAbleUse);
 		if ((DefineOld.Item.Category)_data.category == DefineOld.Item.Category.SHOP) {
@@ -114,8 +114,8 @@ public class BannerItem : BannerBase {
 		m_bIsUserData = true;
 		m_sprBuyBase.gameObject.SetActive (false);
 
-		//m_bAbleUse = DataManager.user.AbleBuy (0 , 0, 0 , _iCostNokori);
-		m_bAbleUse = DataManager.user.AbleBuy (0, 0, 0, 0, 0, 0, ref m_eReason);
+		//m_bAbleUse = DataManager.Instance.user.AbleBuy (0 , 0, 0 , _iCostNokori);
+		m_bAbleUse = DataManager.Instance.user.AbleBuy (0, 0, 0, 0, 0, 0, ref m_eReason);
 
 		//m_lbReason.gameObject.SetActive (!m_bAbleUse);
 		SetReasonSprite (m_sprReason, m_eReason);
@@ -228,7 +228,7 @@ public class BannerItem : BannerBase {
 
 					case DefineOld.Item.Category.TICKET:
 
-						if (m_ItemMaster.need_coin <= DataManager.user.m_iGold) {
+						if (m_ItemMaster.need_coin <= DataManager.Instance.user.m_iGold) {
 							m_eStep = STEP.TICKET_CHECK;
 						} else {
 							m_bAbleUse = false;
@@ -236,7 +236,7 @@ public class BannerItem : BannerBase {
 						}
 						break;
 					case DefineOld.Item.Category.GOLD:
-						if (m_ItemMaster.need_ticket <= DataManager.user.m_iTicket) {
+						if (m_ItemMaster.need_ticket <= DataManager.Instance.user.m_iTicket) {
 							m_eStep = STEP.GOLD_CHECK;
 						} else {
 							m_bAbleUse = false;
@@ -282,10 +282,10 @@ public class BannerItem : BannerBase {
 				DataItem.OpenNewItem (m_ItemMaster.item_id);
 
 				GameObject prefab = PrefabManager.Instance.PrefabLoadInstance ("prefab/PrefFieldItem");
-				DataManager.user.AddGold (-1 * m_ItemMaster.need_coin);
-				for (int x = 0; x < DataManager.user.m_iWidth + DefineOld.EXPAND_FIELD + 1; x++) {
-					for (int y = 0; y < DataManager.user.m_iHeight + DefineOld.EXPAND_FIELD + 1; y++) {
-						if ( DataManager.user.m_iWidth <= x || DataManager.user.m_iHeight <= y ) {
+				DataManager.Instance.user.AddGold (-1 * m_ItemMaster.need_coin);
+				for (int x = 0; x < DataManager.Instance.user.m_iWidth + DefineOld.EXPAND_FIELD + 1; x++) {
+					for (int y = 0; y < DataManager.Instance.user.m_iHeight + DefineOld.EXPAND_FIELD + 1; y++) {
+						if ( DataManager.Instance.user.m_iWidth <= x || DataManager.Instance.user.m_iHeight <= y ) {
 
 							CtrlFieldItem script = null;
 							script = GameMain.ParkRoot.GetFieldItem (x, y);
@@ -298,7 +298,7 @@ public class BannerItem : BannerBase {
 							}
 
 							int iDummyItemId = 0;
-							if (x == DataManager.user.m_iWidth + DefineOld.EXPAND_FIELD|| y == DataManager.user.m_iHeight+ DefineOld.EXPAND_FIELD) {
+							if (x == DataManager.Instance.user.m_iWidth + DefineOld.EXPAND_FIELD|| y == DataManager.Instance.user.m_iHeight+ DefineOld.EXPAND_FIELD) {
 								iDummyItemId = -1;
 							}
 							script.Init (x, y, iDummyItemId);
@@ -306,10 +306,10 @@ public class BannerItem : BannerBase {
 						}
 					}
 				}
-				DataManager.user.m_iWidth += DefineOld.EXPAND_FIELD;
-				DataManager.user.m_iHeight += DefineOld.EXPAND_FIELD;
-				PlayerPrefs.SetInt (DefineOld.USER_WIDTH, DataManager.user.m_iWidth);
-				PlayerPrefs.SetInt (DefineOld.USER_HEIGHT, DataManager.user.m_iHeight);
+				DataManager.Instance.user.m_iWidth += DefineOld.EXPAND_FIELD;
+				DataManager.Instance.user.m_iHeight += DefineOld.EXPAND_FIELD;
+				PlayerPrefs.SetInt (DefineOld.USER_WIDTH, DataManager.Instance.user.m_iWidth);
+				PlayerPrefs.SetInt (DefineOld.USER_HEIGHT, DataManager.Instance.user.m_iHeight);
 				PlayerPrefs.Save ();
 			}
 			if (m_ojisanCheck.IsYes ()) {
@@ -337,7 +337,7 @@ public class BannerItem : BannerBase {
 				GameObject objOjisan = PrefabManager.Instance.MakeObject ("prefab/PrefOjisanCheck", gameObject.transform.parent.parent.parent.parent.gameObject );
 				m_ojisanCheck = objOjisan.GetComponent<CtrlOjisanCheck> ();
 				//m_ojisanCheck.Initialize ( string.Format("ゴールドををチケットに\n変換します\nよろしいですか"  ));
-				m_ojisanCheck.Initialize ( string.Format("ゴールドををチケットに\n変換します\n\n{0}枚→ {1}枚\nよろしいですか" , DataManager.user.m_iTicket ,DataManager.user.m_iTicket+m_iTicketNum ));
+				m_ojisanCheck.Initialize ( string.Format("ゴールドををチケットに\n変換します\n\n{0}枚→ {1}枚\nよろしいですか" , DataManager.Instance.user.m_iTicket ,DataManager.Instance.user.m_iTicket+m_iTicketNum ));
 			}
 			if (m_ojisanCheck.IsYes ()) {
 				SoundManager.Instance.PlaySE (SoundName.BUTTON_PUSH, "https://s3-ap-northeast-1.amazonaws.com/every-studio/app/sound/se");
@@ -353,8 +353,8 @@ public class BannerItem : BannerBase {
 
 		case STEP.TICKET_BUY:
 			Debug.Log (string.Format ("add ticket num:{0}" , m_iTicketNum ));
-			DataManager.user.AddGold (-1*m_ItemMaster.need_coin);
-			DataManager.user.AddTicket (m_iTicketNum);
+			DataManager.Instance.user.AddGold (-1*m_ItemMaster.need_coin);
+			DataManager.Instance.user.AddTicket (m_iTicketNum);
 			GameMain.Instance.HeaderRefresh ();
 			m_eStep = STEP.IDLE;
 			break;
@@ -363,7 +363,7 @@ public class BannerItem : BannerBase {
 			if (bInit) {
 				GameObject objOjisan = PrefabManager.Instance.MakeObject ("prefab/PrefOjisanCheck", gameObject.transform.parent.parent.parent.parent.gameObject );
 				m_ojisanCheck = objOjisan.GetComponent<CtrlOjisanCheck> ();
-				m_ojisanCheck.Initialize ( string.Format("チケットをゴールドに\n変換します\n\n{0}G→ {1}G\nよろしいですか" , DataManager.user.m_iGold ,DataManager.user.m_iGold+m_ItemMaster.add_coin ));
+				m_ojisanCheck.Initialize ( string.Format("チケットをゴールドに\n変換します\n\n{0}G→ {1}G\nよろしいですか" , DataManager.Instance.user.m_iGold ,DataManager.Instance.user.m_iGold+m_ItemMaster.add_coin ));
 			}
 			if (m_ojisanCheck.IsYes ()) {
 				SoundManager.Instance.PlaySE (SoundName.BUTTON_PUSH, "https://s3-ap-northeast-1.amazonaws.com/every-studio/app/sound/se");
@@ -378,8 +378,8 @@ public class BannerItem : BannerBase {
 			break;
 
 		case STEP.GOLD_BUY:
-			DataManager.user.AddTicket (-1 * m_ItemMaster.need_ticket);
-			DataManager.user.AddGold (m_ItemMaster.add_coin);
+			DataManager.Instance.user.AddTicket (-1 * m_ItemMaster.need_ticket);
+			DataManager.Instance.user.AddGold (m_ItemMaster.add_coin);
 			GameMain.Instance.HeaderRefresh ();
 			m_eStep = STEP.IDLE;
 			break;

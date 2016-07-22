@@ -76,7 +76,7 @@ public class BannerMonster : BannerBase {
 
 		m_lbDifficulty.text = UtilString.GetSyuunyuu (m_csvMonsterParam.revenew_coin, m_csvMonsterParam.revenew_interval);
 
-		m_bAbleUse = DataManager.user.AbleBuy (_dataMaster.coin, _dataMaster.ticket,  m_csvMonsterParam.cost , _iCostNokori , 0 , 0 , ref m_eReason );
+		m_bAbleUse = DataManager.Instance.user.AbleBuy (_dataMaster.coin, _dataMaster.ticket,  m_csvMonsterParam.cost , _iCostNokori , 0 , 0 , ref m_eReason );
 
 		if (0 < GameMain.Instance.TutorialMonster) {
 			if (GameMain.Instance.TutorialMonster == _dataMaster.monster_id) {
@@ -106,7 +106,7 @@ public class BannerMonster : BannerBase {
 
 		//Debug.Log (m_dataMonsterMaster.cost);
 		//Debug.Log (_iCostNokori);
-		m_bAbleUse = DataManager.user.AbleBuy (0, 0, m_csvMonsterParam.cost, _iCostNokori, 0, 0, ref m_eReason);
+		m_bAbleUse = DataManager.Instance.user.AbleBuy (0, 0, m_csvMonsterParam.cost, _iCostNokori, 0, 0, ref m_eReason);
 		SetReasonSprite (m_sprReason, m_eReason);
 		if (BannerBase.Mode == BannerBase.MODE.MONSTER_DETAIL) {
 			m_bAbleUse = true;
@@ -232,9 +232,9 @@ public class BannerMonster : BannerBase {
 				Debug.LogError (m_csvMonsterParam.monster_id);
 				CsvMonsterParam monster_data = DataManager.GetMonster (m_csvMonsterParam.monster_id);
 				if (0 < monster_data.coin) {
-					DataManager.user.AddGold (-1 * monster_data.coin);
+					DataManager.Instance.user.AddGold (-1 * monster_data.coin);
 				} else if (0 < monster_data.ticket) {
-					DataManager.user.AddTicket (-1 * monster_data.ticket); 
+					DataManager.Instance.user.AddTicket (-1 * monster_data.ticket); 
 				} else {
 					;// エラーちゃう？
 				}
@@ -297,8 +297,8 @@ public class BannerMonster : BannerBase {
 				int iCost = monster.revenew_coin * (int)(600.0f / (float)monster.revenew_interval);
 
 				m_bGoldLess = false;
-				string strText = string.Format ("こちらの動物を\n治療しますか\n\n治療費:{0}G\n\n{1}G → [FFD900]{2}[-]G", iCost , DataManager.user.m_iGold , DataManager.user.m_iGold -iCost );
-				if (DataManager.user.m_iGold < iCost) {
+				string strText = string.Format ("こちらの動物を\n治療しますか\n\n治療費:{0}G\n\n{1}G → [FFD900]{2}[-]G", iCost , DataManager.Instance.user.m_iGold , DataManager.Instance.user.m_iGold -iCost );
+				if (DataManager.Instance.user.m_iGold < iCost) {
 					m_bGoldLess = true;
 					strText = string.Format ("こちらの動物を\n治療しますか\n治療費:{0}G\n\n[FFD900]GOLDが足りません[-]", iCost);
 				}
@@ -313,7 +313,7 @@ public class BannerMonster : BannerBase {
 					SoundManager.Instance.PlaySE ("se_cure", "https://s3-ap-northeast-1.amazonaws.com/every-studio/app/sound/se");
 					CsvMonsterParam monster = DataManager.GetMonster (m_dataMonsterParam.monster_id);
 					int iCost = monster.revenew_coin * (int)(600.0f / (float)monster.revenew_interval);
-					DataManager.user.AddGold (-1 * iCost);
+					DataManager.Instance.user.AddGold (-1 * iCost);
 
 					GameMain.ListRefresh = true;
 

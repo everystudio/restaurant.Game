@@ -24,6 +24,15 @@ public class DataUser {
 	public void AddTicket( int _iAdd ){
 		SetTicket (m_iTicket + _iAdd);
 	}
+	public UnityEventInt UpdatePopularity = new UnityEventInt ();
+	public int m_iPopularity;
+	public void SetPopularity( int _iPopularity ){
+		m_iPopularity = _iPopularity;
+		UpdatePopularity.Invoke (m_iPopularity);
+	}
+	public void AddPopularity( int _iAdd ){
+		SetPopularity (m_iPopularity + _iAdd);
+	}
 
 	public int m_iSyakkin;
 	public string m_strName;

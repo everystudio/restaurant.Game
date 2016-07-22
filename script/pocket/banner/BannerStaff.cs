@@ -65,7 +65,7 @@ public class BannerStaff : BannerBase {
 		m_dataStaff.staff_id = _CsvStaffParam.staff_id;
 		m_dataStaff.staff_serial = 0;
 
-		m_bAbleUse = DataManager.user.AbleBuy (_CsvStaffParam.coin, _CsvStaffParam.ticket, _CsvStaffParam.cost, _iCostNokori, 0, 0, ref m_eReason);
+		m_bAbleUse = DataManager.Instance.user.AbleBuy (_CsvStaffParam.coin, _CsvStaffParam.ticket, _CsvStaffParam.cost, _iCostNokori, 0, 0, ref m_eReason);
 		SetReasonSprite (m_sprReason, m_eReason);
 		m_sprIgnoreBlack.gameObject.SetActive (!m_bAbleUse);
 		SetEnableIcon (m_bAbleUse);
@@ -81,7 +81,7 @@ public class BannerStaff : BannerBase {
 		m_bIsUserData = true;
 		m_sprBuyBase.gameObject.SetActive (false);
 
-		m_bAbleUse = DataManager.user.AbleBuy (0, 0, staff_data.cost, _iCostNokori, 0, 0, ref m_eReason);
+		m_bAbleUse = DataManager.Instance.user.AbleBuy (0, 0, staff_data.cost, _iCostNokori, 0, 0, ref m_eReason);
 
 		if (BannerBase.Mode == BannerBase.MODE.STAFF_BACKYARD_CHECK) {
 			m_bAbleUse = true;

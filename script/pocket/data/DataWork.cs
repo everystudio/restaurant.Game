@@ -119,10 +119,10 @@ public class DataWorkParam : CsvDataParam{
 		GameMain.Instance.AddFukidashi ( work_id , title + " を[FF0000]達成![-]");
 
 		if (0 < prize_coin) {
-			DataManager.user.AddGold (prize_coin);
+			DataManager.Instance.user.AddGold (prize_coin);
 		}
 		if (0 < prize_ticket) {
-			DataManager.user.AddTicket (prize_ticket);
+			DataManager.Instance.user.AddTicket (prize_ticket);
 		}
 		if (0 < prize_monster) {
 			DataManager.Instance.dataMonster.Insert (prize_monster, 0);

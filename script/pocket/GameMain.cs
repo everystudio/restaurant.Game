@@ -150,7 +150,7 @@ public class GameMain : MonoBehaviour {
 		if (m_bInitialized == false) {
 			//int iWidth = PlayerPrefs.GetInt (DefineOld.USER_WIDTH);
 			//int iHeight= PlayerPrefs.GetInt (DefineOld.USER_HEIGHT);
-			//DataManager.user.Initialize (iWidth, iHeight);
+			//DataManager.Instance.user.Initialize (iWidth, iHeight);
 
 			foreach (PageBase2 page in m_PageList) {
 				page.Close ();

@@ -309,9 +309,9 @@ public class Grid {
 				bRet = false;
 			} else if (check_grid.y < 0) {
 				bRet = false;
-			} else if (DataManager.user.m_iWidth <= check_grid.x) {
+			} else if (DataManager.Instance.user.m_iWidth <= check_grid.x) {
 				bRet = false;
-			} else if (DataManager.user.m_iHeight <= check_grid.y) {
+			} else if (DataManager.Instance.user.m_iHeight <= check_grid.y) {
 				bRet = false;
 			} else {
 			}

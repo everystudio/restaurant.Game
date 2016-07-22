@@ -174,7 +174,6 @@ public class DataManager : DataManagerBase <DataManager>{
 		masterItem.LoadMulti (MasterItem.FILENAME);
 		masterMapchip.LoadMulti (MasterMapchip.FILENAME);
 		masterShop.LoadMulti (MasterShop.FILENAME , masterItem.list);
-		Debug.LogError (masterMapchip.list.Count);
 		m_csvItemDetail.Load ();
 
 		//m_csvWork.Load ();
@@ -212,7 +211,7 @@ public class DataManager : DataManagerBase <DataManager>{
 	}
 
 	private DataUser m_tDataUser = new DataUser ();
-	static public DataUser user{
+	public DataUser user{
 		get{
 			return Instance.m_tDataUser;
 		}

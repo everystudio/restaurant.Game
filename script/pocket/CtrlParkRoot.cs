@@ -26,10 +26,10 @@ public class CtrlParkRoot : MonoBehaviourEx {
 
 			//Debug.Log ("Here");
 
-			//DataManager.user.m_iWidth = 20;
-			//DataManager.user.m_iHeight = 20;
-			for (int x = 0; x < DataManager.user.m_iWidth+1; x++) {
-				for( int y = 0; y < DataManager.user.m_iHeight+1;y++ ){
+			//DataManager.Instance.user.m_iWidth = 20;
+			//DataManager.Instance.user.m_iHeight = 20;
+			for (int x = 0; x < DataManager.Instance.user.m_iWidth+1; x++) {
+				for( int y = 0; y < DataManager.Instance.user.m_iHeight+1;y++ ){
 
 					if (IsGridIgnore (ignoreGridList, x, y)) {
 						//Debug.Log ("same" + x.ToString () + " " + y.ToString ());
@@ -55,7 +55,7 @@ public class CtrlParkRoot : MonoBehaviourEx {
 						}
 						if (bHit == false) {
 							int iDummyItemId = 0;
-							if (x == DataManager.user.m_iWidth || y == DataManager.user.m_iHeight) {
+							if (x == DataManager.Instance.user.m_iWidth || y == DataManager.Instance.user.m_iHeight) {
 								iDummyItemId = -1;
 							}
 							script.Init (x, y, iDummyItemId);

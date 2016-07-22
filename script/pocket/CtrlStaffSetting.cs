@@ -98,9 +98,9 @@ public class CtrlStaffSetting : MonoBehaviour {
 
 				CsvStaffParam staff_data = DataManager.GetStaff (m_iSetStaffId);
 				if (0 < staff_data.coin) {
-					DataManager.user.AddGold (-1 * staff_data.coin);
+					DataManager.Instance.user.AddGold (-1 * staff_data.coin);
 				} else if (0 < staff_data.ticket) {
-					DataManager.user.AddTicket (-1 * staff_data.ticket); 
+					DataManager.Instance.user.AddTicket (-1 * staff_data.ticket); 
 				} else {
 					;// エラーちゃう？
 				}

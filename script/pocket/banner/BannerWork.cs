@@ -159,11 +159,11 @@ public class BannerWork : BannerBase {
 				CsvMonsterParam monster_data = DataManager.GetMonster (m_dataWork.mission_monster);
 
 				string strDisp = "";
-				if ( monster_data.coin <= DataManager.user.m_iGold ) {
-					strDisp = string.Format("本当に購入しますか?\n({0}G)\n\n{1}G→[FFD900]{2}G[-]" , monster_data.coin , DataManager.user.m_iGold , DataManager.user.m_iGold - monster_data.coin );
-					//strDisp = string.Format("こちらの動物を\n購入しますか({0}G)\n\n{1}G→{2}G" , monster_data.coin , DataManager.user.m_iGold , DataManager.user.m_iGold - monster_data.coin );
+				if ( monster_data.coin <= DataManager.Instance.user.m_iGold ) {
+					strDisp = string.Format("本当に購入しますか?\n({0}G)\n\n{1}G→[FFD900]{2}G[-]" , monster_data.coin , DataManager.Instance.user.m_iGold , DataManager.Instance.user.m_iGold - monster_data.coin );
+					//strDisp = string.Format("こちらの動物を\n購入しますか({0}G)\n\n{1}G→{2}G" , monster_data.coin , DataManager.Instance.user.m_iGold , DataManager.Instance.user.m_iGold - monster_data.coin );
 				} else {
-					strDisp = string.Format("こちらの動物を\n購入しますか\n\n購入には[FF0000]{0}G[-]必要です\n[FF0000]{1}G[-]不足しています" , monster_data.coin,monster_data.coin - DataManager.user.m_iGold);
+					strDisp = string.Format("こちらの動物を\n購入しますか\n\n購入には[FF0000]{0}G[-]必要です\n[FF0000]{1}G[-]不足しています" , monster_data.coin,monster_data.coin - DataManager.Instance.user.m_iGold);
 					m_ojisanCheck.YesOrNo.EnableButtonYes (false);
 				}
 
@@ -197,7 +197,7 @@ public class BannerWork : BannerBase {
 				DataManager.Instance.dataMonster.Insert (m_dataWork.mission_monster, 0);
 				CsvMonsterParam monster_data = DataManager.GetMonster (m_dataWork.mission_monster);
 
-				DataManager.user.AddGold (monster_data.coin * -1);
+				DataManager.Instance.user.AddGold (monster_data.coin * -1);
 				DataWork.WorkCheck ();
 			}
 			if (m_ojisanCheck.IsYes ()) {

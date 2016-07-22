@@ -53,7 +53,7 @@ public class CtrlCollectGold : Singleton<CtrlCollectGold> {
 			iShisyutsu += staff.GetPayGold (true);
 		}
 		if (0 < iShisyutsu) {
-			DataManager.user.AddGold (-1 * iShisyutsu);
+			DataManager.Instance.user.AddGold (-1 * iShisyutsu);
 		}
 		yield return 0;
 	}
@@ -110,10 +110,10 @@ public class CtrlCollectGold : Singleton<CtrlCollectGold> {
 			if (0 < m_iCollectGold) {
 				SoundManager.Instance.PlaySE ("se_cash", "https://s3-ap-northeast-1.amazonaws.com/every-studio/app/sound/se");
 
-				DataManager.user.AddCollect ();
-				DataManager.user.AddGold (m_iCollectGold);
-				DataManager.user.AddSyakkin (-1 * m_iCollectGold);
-				DataManager.user.AddExp (m_iCollectExp);
+				DataManager.Instance.user.AddCollect ();
+				DataManager.Instance.user.AddGold (m_iCollectGold);
+				DataManager.Instance.user.AddSyakkin (-1 * m_iCollectGold);
+				DataManager.Instance.user.AddExp (m_iCollectExp);
 				m_iCollectExp = 0;
 				SetCollectGold (0);
 
