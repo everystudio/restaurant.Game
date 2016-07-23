@@ -236,7 +236,7 @@ public class BannerItem : BannerBase {
 						}
 						break;
 					case DefineOld.Item.Category.GOLD:
-						if (m_ItemMaster.need_ticket <= DataManager.Instance.user.m_iTicket) {
+						if (m_ItemMaster.need_ticket <= DataManager.Instance.user.ticket) {
 							m_eStep = STEP.GOLD_CHECK;
 						} else {
 							m_bAbleUse = false;
@@ -337,7 +337,7 @@ public class BannerItem : BannerBase {
 				GameObject objOjisan = PrefabManager.Instance.MakeObject ("prefab/PrefOjisanCheck", gameObject.transform.parent.parent.parent.parent.gameObject );
 				m_ojisanCheck = objOjisan.GetComponent<CtrlOjisanCheck> ();
 				//m_ojisanCheck.Initialize ( string.Format("ゴールドををチケットに\n変換します\nよろしいですか"  ));
-				m_ojisanCheck.Initialize ( string.Format("ゴールドををチケットに\n変換します\n\n{0}枚→ {1}枚\nよろしいですか" , DataManager.Instance.user.m_iTicket ,DataManager.Instance.user.m_iTicket+m_iTicketNum ));
+				m_ojisanCheck.Initialize ( string.Format("ゴールドををチケットに\n変換します\n\n{0}枚→ {1}枚\nよろしいですか" , DataManager.Instance.user.ticket ,DataManager.Instance.user.ticket+m_iTicketNum ));
 			}
 			if (m_ojisanCheck.IsYes ()) {
 				SoundManager.Instance.PlaySE (SoundName.BUTTON_PUSH, "https://s3-ap-northeast-1.amazonaws.com/every-studio/app/sound/se");
@@ -354,7 +354,7 @@ public class BannerItem : BannerBase {
 		case STEP.TICKET_BUY:
 			Debug.Log (string.Format ("add ticket num:{0}" , m_iTicketNum ));
 			DataManager.Instance.user.AddGold (-1*m_ItemMaster.need_coin);
-			DataManager.Instance.user.AddTicket (m_iTicketNum);
+			DataManager.Instance.user.ticket += (m_iTicketNum);
 			GameMain.Instance.HeaderRefresh ();
 			m_eStep = STEP.IDLE;
 			break;
@@ -378,7 +378,7 @@ public class BannerItem : BannerBase {
 			break;
 
 		case STEP.GOLD_BUY:
-			DataManager.Instance.user.AddTicket (-1 * m_ItemMaster.need_ticket);
+			DataManager.Instance.user.ticket += (-1 * m_ItemMaster.need_ticket);
 			DataManager.Instance.user.AddGold (m_ItemMaster.add_coin);
 			GameMain.Instance.HeaderRefresh ();
 			m_eStep = STEP.IDLE;

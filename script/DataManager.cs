@@ -446,6 +446,7 @@ public class DataManager : DataManagerBase <DataManager>{
 		TICKET		,		// チケット
 		POPULARITY	,		// 人気
 
+		MONEY		,		// 実際のお金
 		MAX			,
 	}
 
@@ -482,7 +483,7 @@ public class DataManager : DataManagerBase <DataManager>{
 	#if UNITY_EDITOR
 	void Update(){
 
-		user.AddCoin (1);
+		user.coin += 1;
 
 		if (m_bDebugSave) {
 			m_bDebugSave = false;

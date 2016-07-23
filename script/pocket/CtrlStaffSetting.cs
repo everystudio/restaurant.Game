@@ -100,7 +100,7 @@ public class CtrlStaffSetting : MonoBehaviour {
 				if (0 < staff_data.coin) {
 					DataManager.Instance.user.AddGold (-1 * staff_data.coin);
 				} else if (0 < staff_data.ticket) {
-					DataManager.Instance.user.AddTicket (-1 * staff_data.ticket); 
+					DataManager.Instance.user.ticket += (-1 * staff_data.ticket); 
 				} else {
 					;// エラーちゃう？
 				}

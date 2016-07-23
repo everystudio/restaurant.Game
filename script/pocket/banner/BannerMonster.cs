@@ -234,7 +234,7 @@ public class BannerMonster : BannerBase {
 				if (0 < monster_data.coin) {
 					DataManager.Instance.user.AddGold (-1 * monster_data.coin);
 				} else if (0 < monster_data.ticket) {
-					DataManager.Instance.user.AddTicket (-1 * monster_data.ticket); 
+					DataManager.Instance.user.ticket += (-1 * monster_data.ticket); 
 				} else {
 					;// エラーちゃう？
 				}

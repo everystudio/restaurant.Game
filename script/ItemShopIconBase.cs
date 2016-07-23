@@ -21,11 +21,13 @@ abstract public class ItemShopIconBase : MonoBehaviour {
 
 	}
 	abstract protected void initialize (MasterShopParam _paramShop , MasterMapchipParam _paramMaphip);
-	abstract protected void purchased ();
+	abstract protected bool purchased ();
 
 	public void Purchase(){
-		Debug.LogError (string.Format ("purchase:item_id={0}", m_masterShopParam.item_id));
-		purchased ();
+		//Debug.LogError (string.Format ("purchase:item_id={0}", m_masterShopParam.item_id));
+		if (purchased () == false) {
+			Debug.LogError ("error purchase");
+		}
 	}
 
 }

@@ -122,7 +122,7 @@ public class DataWorkParam : CsvDataParam{
 			DataManager.Instance.user.AddGold (prize_coin);
 		}
 		if (0 < prize_ticket) {
-			DataManager.Instance.user.AddTicket (prize_ticket);
+			DataManager.Instance.user.ticket += (prize_ticket);
 		}
 		if (0 < prize_monster) {
 			DataManager.Instance.dataMonster.Insert (prize_monster, 0);

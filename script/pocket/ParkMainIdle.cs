@@ -268,7 +268,7 @@ public class ParkMainIdle : ParkMainController
 				int iNeedTicket = RequireTicketNum (m_iNokoriTime);
 				m_itemCheck.Initialize ( m_selectItem.item_id , string.Format ("この施設は完成まで\n{0}です\n\nチケット{1}枚で\nすぐに完成します。", strNokoriTime, iNeedTicket));
 
-				if (DataManager.Instance.user.m_iTicket < iNeedTicket) {
+				if (DataManager.Instance.user.ticket < iNeedTicket) {
 					m_itemCheck.YesOrNo.EnableButtonYes (false);
 				}
 			}
@@ -293,7 +293,7 @@ public class ParkMainIdle : ParkMainController
 			dict.Add ("create_time", "\""+ TimeManager.StrGetTime(-1*csv_item_data.production_time) + "\""); 
 
 			DataManager.Instance.m_dataItem.Update (m_selectItem.item_serial, dict);
-			DataManager.Instance.user.AddTicket (-1 * RequireTicketNum (m_iNokoriTime));
+			DataManager.Instance.user.ticket += (-1 * RequireTicketNum (m_iNokoriTime));
 
 			// 仕事の確認
 			DataWork.WorkCheck ();

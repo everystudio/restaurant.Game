@@ -46,9 +46,9 @@ public class ItemShopIconFood : ItemShopIconBase {
 		SetNum (0);
 	}
 
-	protected override void purchased ()
+	protected override bool purchased ()
 	{
-		return;
+		return false;
 	}
 
 	public void SetNum( int _iNum ){

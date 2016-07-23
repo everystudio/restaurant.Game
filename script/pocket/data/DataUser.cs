@@ -6,34 +6,45 @@ using System.Collections;
 public class DataUser {
 
 	public UnityEventInt UpdateCoin = new UnityEventInt ();
-	public int m_iCoin;
-	public void SetCoin( int _iCoin ){
-		m_iCoin = _iCoin;
-		UpdateCoin.Invoke (m_iCoin);
-	}
-	public void AddCoin( int _iAdd ){
-		SetCoin (m_iCoin + _iAdd);
+	protected int m_iCoin;
+	public int coin{
+		get{
+			return m_iCoin;
+		}
+		set{
+			m_iCoin = value;
+			UpdateCoin.Invoke (m_iCoin);
+		}
 	}
 
 	public UnityEventInt UpdateTicket = new UnityEventInt ();
-	public int m_iTicket;
-	public void SetTicket( int _iTicket ){
-		m_iTicket = _iTicket;
-		UpdateTicket.Invoke (m_iTicket);
-	}
-	public void AddTicket( int _iAdd ){
-		SetTicket (m_iTicket + _iAdd);
+	protected int m_iTicket;
+	public int ticket{
+		get{
+			return m_iTicket;
+		}
+		set{
+			m_iTicket = value;
+			UpdateTicket.Invoke (m_iTicket);
+		}
 	}
 	public UnityEventInt UpdatePopularity = new UnityEventInt ();
 	public int m_iPopularity;
-	public void SetPopularity( int _iPopularity ){
-		m_iPopularity = _iPopularity;
-		UpdatePopularity.Invoke (m_iPopularity);
-	}
-	public void AddPopularity( int _iAdd ){
-		SetPopularity (m_iPopularity + _iAdd);
+	public int popularity{
+		get{
+			return m_iPopularity;
+		}
+		set{
+			m_iPopularity = value;
+			UpdatePopularity.Invoke (m_iPopularity);
+		}
 	}
 
+
+
+
+
+	#region Pocket
 	public int m_iSyakkin;
 	public string m_strName;
 	public int m_iLevel;
@@ -108,8 +119,7 @@ public class DataUser {
 			}
 		}
 		return bRet;
-
-
 	}
+	#endregion
 
 }
