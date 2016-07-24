@@ -174,6 +174,10 @@ public class DataManager : DataManagerBase <DataManager>{
 		masterItem.LoadMulti (MasterItem.FILENAME);
 		masterMapchip.LoadMulti (MasterMapchip.FILENAME);
 		masterShop.LoadMulti (MasterShop.FILENAME , masterItem.list);
+		masterFoodmenu.LoadMulti (MasterFoodmenu.FILENAME);
+		if (dataFoodmenu.Load (DataFoodmenu.FILENAME) == false) {
+			dataFoodmenu.Save (DataFoodmenu.FILENAME);
+		}
 		m_csvItemDetail.Load ();
 
 		//m_csvWork.Load ();
@@ -311,6 +315,8 @@ public class DataManager : DataManagerBase <DataManager>{
 	public MasterItem masterItem = new MasterItem();
 	public MasterMapchip masterMapchip = new MasterMapchip();
 	public MasterShop masterShop = new MasterShop();
+	public MasterFoodmenu masterFoodmenu = new MasterFoodmenu();
+	public DataFoodmenu dataFoodmenu = new DataFoodmenu();
 	#endregion
 
 	public CsvStaffData m_csvStaff = new CsvStaffData();

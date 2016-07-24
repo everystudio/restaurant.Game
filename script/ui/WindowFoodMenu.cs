@@ -3,13 +3,13 @@ using System.Collections;
 
 public class WindowFoodMenu : CPanel {
 
-	// Use this for initialization
-	void Start () {
-	
+	[SerializeField]
+	private FoodmenuList m_foodmenuList;
+
+	protected override void panelStart ()
+	{
+		base.panelStart ();
+		m_foodmenuList.Initialize ();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+
 }
