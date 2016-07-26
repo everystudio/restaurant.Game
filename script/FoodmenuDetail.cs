@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 using System.Collections;
 
@@ -30,13 +31,73 @@ public class FoodmenuDetail : MonoBehaviour {
 	[SerializeField]
 	private Button m_btnFoodRegister;
 
-	private void OnPushedProduce(){
+	[SerializeField]
+	private Image m_imgBtnFoodProduce;
+	[SerializeField]
+	private Image m_imgBtnFoodRegister;
+
+	private MasterFoodmenuParam m_masterFoodmenu;
+	public CtrlOjisanCheckUgui m_ctrlOjisanCheck;
+
+	public UnityEvent RefreshBanner = new UnityEvent();
+
+	private void Refresh(){
+		if (DataManager.Instance.dataFoodmenu.IsProduced (m_masterFoodmenu.foodmenu_id)) {
+			m_btnFoodRegister.interactable = true;
+			if (DataManager.Instance.dataFoodmenu.IsRegisterd (m_masterFoodmenu.foodmenu_id)) {
+				m_imgBtnFoodRegister.sprite = SpriteManager.Instance.Load ("texture/food/btn_food_cancel");
+			} else {
+				m_imgBtnFoodRegister.sprite = SpriteManager.Instance.Load ("texture/food/btn_food_register");
+			}
+
+		} else {
+			m_btnFoodRegister.interactable = false;
+		}
 	}
+	private void OnProduce(){
+
+		m_ctrlOjisanCheck.SelfDestroy ();
+
+		DataManager.Instance.dataFoodmenu.Produce (m_masterFoodmenu.foodmenu_id);
+		RefreshBanner.Invoke ();
+		Refresh();
+
+	}
+	private void OnRegister(){
+	}
+
+
+	private void OnPushedProduce(){
+
+		m_ctrlOjisanCheck = PrefabManager.Instance.MakeScript<CtrlOjisanCheckUgui> ("prefab/UguiOjisanCheck", gameObject.transform.parent.gameObject);
+
+		string strMessage = "";
+		if (DataManager.Instance.dataFoodmenu.IsProduced (m_masterFoodmenu.foodmenu_id) == false) {
+			strMessage = "このメニューを新規開発しますか？";
+		} else {
+			strMessage = "このメニューを改良しますか？";
+		}
+		m_ctrlOjisanCheck.Initialize (strMessage);
+		m_ctrlOjisanCheck.m_btnYes.ClickButtonEvent.AddListener (OnProduce);
+		m_ctrlOjisanCheck.m_btnNo.ClickButtonEvent.AddListener (OnRegister);
+
+	}
+
+
 	private void OnPushedRegister(){
+		DataFoodmenuParam param = DataManager.Instance.dataFoodmenu.Get (m_masterFoodmenu.foodmenu_id);
+
+		if (DataManager.Instance.dataFoodmenu.IsRegisterd (m_masterFoodmenu.foodmenu_id)) {
+			param.status = (int)DataFoodmenuParam.STATUS.PRODUCED;
+		} else {
+			param.status = (int)DataFoodmenuParam.STATUS.REGISTERD;
+		}
+		Refresh ();
+		RefreshBanner.Invoke ();
 	}
 
 	public void Initialize( MasterFoodmenuParam _FoodmenuParam ){
-
+		m_masterFoodmenu = _FoodmenuParam;
 		m_txtMenuName.text = _FoodmenuParam.name;
 		m_imgMemuIcon.sprite = SpriteManager.Instance.Load (MasterFoodmenu.GetIconFilename (_FoodmenuParam.foodmenu_id));
 		m_ctrlPrice.SetNum (DataManager.USER_PARAM.COIN, _FoodmenuParam.coin);
@@ -48,13 +109,18 @@ public class FoodmenuDetail : MonoBehaviour {
 
 		m_ctrlRareStars.Initialize (_FoodmenuParam.rarity);
 
-		m_btnFoodProduce.onClick.AddListener (OnPushedProduce);
-		m_btnFoodRegister.onClick.AddListener (OnPushedRegister);
+		Refresh ();
 
 	}
 
+
 	public void Initialize( int _foodmenuId ){
 		Initialize (DataManager.Instance.masterFoodmenu.Get (_foodmenuId));
+	}
+
+	public void Awake(){
+		m_btnFoodProduce.onClick.AddListener (OnPushedProduce);
+		m_btnFoodRegister.onClick.AddListener (OnPushedRegister);
 	}
 
 

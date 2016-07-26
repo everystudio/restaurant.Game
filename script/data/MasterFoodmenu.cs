@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class MasterFoodmenuParam : CsvDataParam {
 
@@ -41,7 +42,19 @@ public class MasterFoodmenuParam : CsvDataParam {
 
 public class MasterFoodmenu : CsvData<MasterFoodmenuParam > {
 	public const string FILENAME = "master/foodmenu";
+	Dictionary<int, MasterFoodmenuParam> dict = new Dictionary<int, MasterFoodmenuParam> ();
 
+	public override bool LoadMulti (string _strFilename)
+	{
+		bool bRet = base.LoadMulti (_strFilename);
+		dict.Clear ();
+		if (bRet) {
+			foreach (MasterFoodmenuParam param in list) {
+				dict.Add (param.foodmenu_id, param);
+			}
+		}
+		return bRet;
+	}
 	static public string GetIconFilename( int _foodmenuId ){
 		string strFilename = "";
 		strFilename = string.Format ("texture/food/foodmenu_{0:D4}_icon", _foodmenuId);
@@ -49,13 +62,11 @@ public class MasterFoodmenu : CsvData<MasterFoodmenuParam > {
 	}
 
 	public MasterFoodmenuParam Get( int _foodmenuId ){
-		foreach (MasterFoodmenuParam param in list) {
-			if (param.foodmenu_id == _foodmenuId) {
-				return param;
-			}
+		MasterFoodmenuParam param;
+		if (dict.TryGetValue (_foodmenuId, out param) == false ) {
+			param = new MasterFoodmenuParam ();
 		}
-		// 基本よくないtfの戻り値の方が健全かも
-		return new MasterFoodmenuParam ();
+		return param;
 	}
 }
 

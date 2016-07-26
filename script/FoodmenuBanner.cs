@@ -15,6 +15,9 @@ public class FoodmenuBanner : MonoBehaviour {
 	private Image m_imgIcon;
 
 	[SerializeField]
+	private Image m_imgBack;
+
+	[SerializeField]
 	private CtrlRareStars m_ctrlRareStars;
 
 	[SerializeField]
@@ -22,6 +25,14 @@ public class FoodmenuBanner : MonoBehaviour {
 
 	private MasterFoodmenuParam m_masterFoodmenuParam;
 
+	public void Refresh(){
+		if (DataManager.Instance.dataFoodmenu.IsProduced (m_masterFoodmenuParam.foodmenu_id) == false) {
+			m_imgBack.color = new Color (0.5f, 0.5f, 0.5f);
+		} else {
+			m_imgBack.color = new Color (1.0f, 1.0f, 1.0f);
+		}
+		return;
+	}
 
 	public void Initialize( MasterFoodmenuParam _param ){
 		m_masterFoodmenuParam = _param;
@@ -29,6 +40,8 @@ public class FoodmenuBanner : MonoBehaviour {
 		m_txtName.text = _param.name;
 		m_ctrlPrice.SetNum (DataManager.USER_PARAM.COIN, _param.coin);
 		m_ctrlRareStars.Initialize (_param.rarity);
+
+		Refresh ();
 
 		gameObject.GetComponent<Button> ().onClick.AddListener (
 			()=>{

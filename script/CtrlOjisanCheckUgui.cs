@@ -12,6 +12,10 @@ public class CtrlOjisanCheckUgui : MonoBehaviour {
 
 	#endregion
 
+	public void SelfDestroy(){
+		Destroy (gameObject);
+	}
+
 	virtual public void Initialize(string _strMessage , bool _bIsYesOnly = false ){
 		m_textMessage.text = _strMessage;
 
