@@ -218,11 +218,8 @@ public class DataItemParam : CsvDataParam{
 
 	public int GetShiSyutsuPerHour(){
 		int iShisyutsu = 0;
-		List<DataStaffParam > staff_list = DataManager.Instance.dataStaff.Select (" item_serial = " + item_serial.ToString ());
 
-		foreach (DataStaffParam staff in staff_list) {
-			iShisyutsu += staff.GetShisyutsuParHour ();
-		}
+
 		return iShisyutsu;
 	}
 

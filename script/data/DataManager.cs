@@ -164,7 +164,6 @@ public class DataManager : DataManagerBase <DataManager>{
 		m_csvItem.Load ();
 		m_csvMonster.Load ();
 		dataMonster.Load (DataMonster.FILENAME);
-		dataStaff.Load (DataStaff.FILENAME);
 		//Debug.LogError ("here");
 		m_dataItem.Load (DataItem.FILENAME);
 
@@ -178,6 +177,12 @@ public class DataManager : DataManagerBase <DataManager>{
 		if (dataFoodmenu.Load (DataFoodmenu.FILENAME) == false) {
 			dataFoodmenu.Save (DataFoodmenu.FILENAME);
 		}
+		masterStaff.LoadMulti (MasterStaff.FILENAME);
+		if (dataStaff.Load (DataStaff.FILENAME) == false) {
+			dataStaff.Save (DataStaff.FILENAME);
+		}
+
+
 		m_csvItemDetail.Load ();
 
 		//m_csvWork.Load ();
@@ -308,7 +313,6 @@ public class DataManager : DataManagerBase <DataManager>{
 	}
 	public DataWork dataWork = new DataWork ();
 	public DataMonster dataMonster = new DataMonster ();
-	public DataStaff dataStaff= new DataStaff();
 
 	#region データ関連（一応ここに集約ポケット系は消したい）
 	public DataMapchip dataMapchip = new DataMapchip();
@@ -317,6 +321,8 @@ public class DataManager : DataManagerBase <DataManager>{
 	public MasterShop masterShop = new MasterShop();
 	public MasterFoodmenu masterFoodmenu = new MasterFoodmenu();
 	public DataFoodmenu dataFoodmenu = new DataFoodmenu();
+	public MasterStaff masterStaff= new MasterStaff();
+	public DataStaff dataStaff= new DataStaff();
 	#endregion
 
 	public CsvStaffData m_csvStaff = new CsvStaffData();

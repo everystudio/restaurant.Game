@@ -2,14 +2,13 @@
 using System.Collections;
 
 public class WindowStaffList : CPanel {
+	[SerializeField]
+	private StaffList m_staffList;
 
-	// Use this for initialization
-	void Start () {
-	
+	protected override void panelStart ()
+	{
+		base.panelStart ();
+		m_staffList.Initialize ();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+
 }

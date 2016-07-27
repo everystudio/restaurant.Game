@@ -46,15 +46,6 @@ public class CtrlCollectGold : Singleton<CtrlCollectGold> {
 		}
 		m_iCollectGold = iCollectGold;
 
-		// 支出の計算
-		int iShisyutsu = 0;
-		List<DataStaffParam> staff_list = DataManager.Instance.dataStaff.Select (" office_serial != 0 ");
-		foreach (DataStaffParam staff in staff_list) {
-			iShisyutsu += staff.GetPayGold (true);
-		}
-		if (0 < iShisyutsu) {
-			DataManager.Instance.user.AddGold (-1 * iShisyutsu);
-		}
 		yield return 0;
 	}
 	public override void Initialize ()

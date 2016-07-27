@@ -7,68 +7,51 @@ using System.Collections.Generic;
 public class DataStaffParam : CsvDataParam {
 
 	public int m_staff_serial;
-	public int m_office_serial;
 	public int m_staff_id;
+	public int m_office_serial;
 	public int m_item_serial;
+
+	public int m_level;
+	public int m_exp;
+	public int m_role;
+
+	public int m_manner;
+	public int m_footwork;
+	public int m_cook;
+
 	public string m_setting_time;
 	public string m_create_time;
 
 	public int staff_serial { get{ return m_staff_serial;} set{m_staff_serial = value; } }
-	public int office_serial { get{ return m_office_serial;} set{m_office_serial = value; } }
 	public int staff_id { get{ return m_staff_id;} set{m_staff_id = value; } }
+	public int office_serial { get{ return m_office_serial;} set{m_office_serial = value; } }
 	public int item_serial { get{ return m_item_serial;} set{m_item_serial = value; } }
+
+	public int level { get{ return m_level;} set{m_level = value; } }
+	public int exp { get{ return m_exp;} set{m_exp = value; } }
+	public int role { get{ return m_role;} set{m_role = value; } }
+
+	public int manner { get{ return m_manner;} set{m_manner = value; } }
+	public int footwork { get{ return m_footwork;} set{m_footwork = value; } }
+	public int cook { get{ return m_cook;} set{m_cook = value; } }
+
 	public string setting_time { get{ return m_setting_time;} set{m_setting_time = value; } }
 	public string create_time { get{ return m_create_time;} set{m_create_time = value; } }
-
-
-	public int GetShisyutsuParHour(){
-		int iRet = 0;
-		CsvStaffParam staff_csv = DataManager.GetStaff (staff_id);
-
-		int iCount = 3600 / staff_csv.expenditure_interval;
-		iRet += staff_csv.expenditure * iCount;
-
-		return iRet;
-	}
-
-
-	public int GetPayGold( bool _bCollect ){
-
-		CsvStaffParam csv_staff = DataManager.GetStaff (staff_id);
-
-		double diffSec = TimeManager.Instance.GetDiffNow (setting_time).TotalSeconds * -1.0d;
-
-		double dCount = diffSec / csv_staff.expenditure_interval;
-
-		double dRet = dCount * csv_staff.expenditure;
-		if (_bCollect && 1 < dRet ) {
-
-			int iAmari = (int)diffSec % csv_staff.expenditure_interval;
-
-			//Debug.LogError( string.Format( "amari:{0} diffSec:{1} interval:{2}" , iAmari , diffSec, csv_staff.expenditure_interval));
-			string strResetTime = TimeManager.StrGetTime (iAmari * -1);
-			strResetTime = TimeManager.StrGetTime ();
-			//Debug.LogError (TimeManager.Instance.GetOffsetTime (setting_time, iAmari));
-
-			Dictionary< string , string > dict = new Dictionary< string , string > ();
-			dict.Add ("setting_time", "\"" + strResetTime + "\"");
-			DataManager.Instance.dataStaff.Update (staff_serial, dict);
-			/*
-			foreach (DataStaffParam param in DataManager.Instance.dataStaff.list) {
-				Debug.LogError (string.Format ("staff_serial:{0} setting_time:{1} strResetTime:{2}", param.staff_serial, param.setting_time , strResetTime));
-			}
-			*/
-		}
-		//int iCount = 
-
-		return (int)dRet;
-	}
 }
 
 
 public class DataStaff : CsvData<DataStaffParam>
 {
 	public const string FILENAME = "data/staff";
+
+	public enum ROLE
+	{
+		NONE		= 0,
+		FLOOR		,
+		ENTRANCE	,
+		CHEF		,
+		MAX			,
+	}
 
 	public DataStaffParam Select( int _iStaffSerial ){
 		return SelectOne (string.Format (" staff_serial = {0}", _iStaffSerial));
@@ -84,6 +67,15 @@ public class DataStaff : CsvData<DataStaffParam>
 		return Select (_iStaffSerial);
 
 	}
+
+	public static string GetIconRole( int _iRole ){
+		string strRet = "";
+
+		strRet = string.Format ("texture/staff/staff_role{0:D2}", _iRole);
+		//Debug.LogError (strRet);
+		return strRet;
+	}
+
 
 	public DataStaffParam Insert( int _iStaffId , int _iOfficeItemSerial , int _iCageSerial ){
 		string strNow = TimeManager.StrNow ();
