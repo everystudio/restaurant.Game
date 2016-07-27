@@ -3,13 +3,15 @@ using System.Collections;
 
 public class WindowStaffDetail : CPanel {
 
-	// Use this for initialization
-	void Start () {
-	
+	[SerializeField]
+	private StaffDetail m_staffDetail;
+
+	protected override void panelStart ()
+	{
+		base.panelStart ();
+
+		m_staffDetail.Initialize (UIParam.Instance.staff_detail_serial);
+		UIParam.Instance.staff_detail_serial = 0;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+
 }

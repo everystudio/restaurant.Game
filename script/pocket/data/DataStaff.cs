@@ -14,6 +14,8 @@ public class DataStaffParam : CsvDataParam {
 	public int m_level;
 	public int m_exp;
 	public int m_role;
+	public int m_training_type;
+	public int m_training_last;
 
 	public int m_manner;
 	public int m_footwork;
@@ -29,7 +31,19 @@ public class DataStaffParam : CsvDataParam {
 
 	public int level { get{ return m_level;} set{m_level = value; } }
 	public int exp { get{ return m_exp;} set{m_exp = value; } }
-	public int role { get{ return m_role;} set{m_role = value; } }
+
+	public UnityEventInt UpdateRole = new UnityEventInt ();
+	public int role{
+		get{
+			return m_role;
+		}
+		set{
+			m_role = value;
+			UpdateRole.Invoke (m_role);
+		}
+	}
+	public int training_type { get{ return m_training_type;} set{m_training_type = value; } }
+	public int training_last { get{ return m_training_last;} set{m_training_last = value; } }
 
 	public int manner { get{ return m_manner;} set{m_manner = value; } }
 	public int footwork { get{ return m_footwork;} set{m_footwork = value; } }
@@ -52,6 +66,17 @@ public class DataStaff : CsvData<DataStaffParam>
 		CHEF		,
 		MAX			,
 	}
+	public enum TRAINING
+	{
+		NONE		= 0,
+		BRUSH		,
+		DUMBBELL	,
+		SPOON		,
+		DRESS		,
+		RIBBON		,
+		PAN			,
+		MAX			,
+	}
 
 	public DataStaffParam Select( int _iStaffSerial ){
 		return SelectOne (string.Format (" staff_serial = {0}", _iStaffSerial));
@@ -70,12 +95,16 @@ public class DataStaff : CsvData<DataStaffParam>
 
 	public static string GetIconRole( int _iRole ){
 		string strRet = "";
-
 		strRet = string.Format ("texture/staff/staff_role{0:D2}", _iRole);
 		//Debug.LogError (strRet);
 		return strRet;
 	}
-
+	public static string GetIconRoleMiddle( int _iRole ){
+		string strRet = "";
+		strRet = string.Format ("texture/staff/staff_role{0:D2}_m", _iRole);
+		//Debug.LogError (strRet);
+		return strRet;
+	}
 
 	public DataStaffParam Insert( int _iStaffId , int _iOfficeItemSerial , int _iCageSerial ){
 		string strNow = TimeManager.StrNow ();

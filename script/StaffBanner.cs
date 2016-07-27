@@ -2,7 +2,10 @@
 using UnityEngine.UI;
 using System.Collections;
 
+[RequireComponent(typeof(Button))]
 public class StaffBanner : MonoBehaviour {
+
+	public UnityEventInt OnSelectStaff = new UnityEventInt();
 
 	[SerializeField]
 	private Text m_textName;
@@ -34,14 +37,27 @@ public class StaffBanner : MonoBehaviour {
 	[SerializeField]
 	private CtrlUserParam m_paramKeihi;
 
+	private DataStaffParam m_dataStaffParam;
+	public void ButtonPushed(){
+		OnSelectStaff.Invoke (m_dataStaffParam.staff_serial);
+	}
+
+	public void UpdateRole( int _iRole ){
+		m_imgRole.sprite = SpriteManager.Instance.Load( DataStaff.GetIconRole(_iRole));
+	}
+
 	public void Initialize( DataStaffParam _param ){
+		m_dataStaffParam = _param;
+		gameObject.GetComponent<Button> ().onClick.AddListener (ButtonPushed);
 
 		MasterStaffParam masterParam = DataManager.Instance.masterStaff.Get (_param.staff_id);
 
 		m_textName.text = masterParam.name;
 		m_ctrlRareStarts.Initialize (masterParam.rarity);
 
-		m_imgRole.sprite = SpriteManager.Instance.Load( DataStaff.GetIconRole(_param.role));
+		UpdateRole (_param.role);
+		_param.UpdateRole.AddListener (UpdateRole);
+			
 		m_imgChara.sprite = SpriteManager.Instance.Load (MasterStaff.GetIconName (masterParam.staff_id));
 
 		if (5 <= masterParam.rarity) {
@@ -63,9 +79,6 @@ public class StaffBanner : MonoBehaviour {
 		m_paramKeihi.SetNum (DataManager.USER_PARAM.COIN, masterParam.pay);
 
 	}
-
-
-
 
 }
 
