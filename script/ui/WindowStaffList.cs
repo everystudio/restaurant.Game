@@ -9,6 +9,8 @@ public class WindowStaffList : CPanel {
 	{
 		base.panelStart ();
 		m_staffList.Initialize ();
+
+		UIAssistant.main.SetPrevPage ("MainIdle");
 	}
 
 }

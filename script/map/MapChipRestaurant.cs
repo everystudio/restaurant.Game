@@ -12,7 +12,7 @@ public class MapChipRestaurant : MapChipBase<DataMapchipParam> {
 	private UI2DSprite m_sprImage;
 
 	private EditMenuButtonRoot m_editMenuButtonRoot;
-	private CtrlOjisanCheckUgui m_ctrlOjisanCheck;
+	private CtrlCharaCheck m_ctrlOjisanCheck;
 
 	private void goBackyard(){
 		OnBackyard.Invoke ();
@@ -25,10 +25,10 @@ public class MapChipRestaurant : MapChipBase<DataMapchipParam> {
 	}
 
 	private void pushBackyard(){
-		m_ctrlOjisanCheck = PrefabManager.Instance.MakeScript<CtrlOjisanCheckUgui>( "prefab/UguiOjisanCheck" , GameObject.Find("UIEditMove") );
+		m_ctrlOjisanCheck = PrefabManager.Instance.MakeScript<CtrlCharaCheck>( "prefab/UguiCharaCheck" , GameObject.Find("UIEditMove") );
 		m_ctrlOjisanCheck.Initialize ("バックヤードに移動させますか？");
-		m_ctrlOjisanCheck.m_btnYes.ClickButtonEvent.AddListener (goBackyard);
-		m_ctrlOjisanCheck.m_btnNo.ClickButtonEvent.AddListener (cancelBackyard);
+		m_ctrlOjisanCheck.btnYes.onClick.AddListener (goBackyard);
+		m_ctrlOjisanCheck.btnNo.onClick.AddListener (cancelBackyard);
 	}
 
 	public void SetFlip(){

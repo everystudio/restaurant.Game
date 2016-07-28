@@ -37,7 +37,7 @@ public class FoodmenuDetail : MonoBehaviour {
 	private Image m_imgBtnFoodRegister;
 
 	private MasterFoodmenuParam m_masterFoodmenu;
-	public CtrlOjisanCheckUgui m_ctrlOjisanCheck;
+	public CtrlCharaCheck m_ctrlOjisanCheck;
 
 	public UnityEvent RefreshBanner = new UnityEvent();
 
@@ -69,7 +69,7 @@ public class FoodmenuDetail : MonoBehaviour {
 
 	private void OnPushedProduce(){
 
-		m_ctrlOjisanCheck = PrefabManager.Instance.MakeScript<CtrlOjisanCheckUgui> ("prefab/UguiOjisanCheck", gameObject.transform.parent.gameObject);
+		m_ctrlOjisanCheck = PrefabManager.Instance.MakeScript<CtrlCharaCheck> ("prefab/UguiCharaCheck", gameObject.transform.parent.gameObject);
 
 		string strMessage = "";
 		if (DataManager.Instance.dataFoodmenu.IsProduced (m_masterFoodmenu.foodmenu_id) == false) {
@@ -78,8 +78,8 @@ public class FoodmenuDetail : MonoBehaviour {
 			strMessage = "このメニューを改良しますか？";
 		}
 		m_ctrlOjisanCheck.Initialize (strMessage);
-		m_ctrlOjisanCheck.m_btnYes.ClickButtonEvent.AddListener (OnProduce);
-		m_ctrlOjisanCheck.m_btnNo.ClickButtonEvent.AddListener (OnRegister);
+		m_ctrlOjisanCheck.btnYes.onClick.AddListener (OnProduce);
+		m_ctrlOjisanCheck.btnNo.onClick.AddListener (OnRegister);
 
 	}
 

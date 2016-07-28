@@ -18,7 +18,40 @@ public class StaffDetail : MonoBehaviour {
 	[SerializeField]
 	private List<StaffRoleBanner> m_staffRoleBannerList = new List<StaffRoleBanner>();
 
+	[SerializeField]
+	private Button m_btnFire;
+
+	private DataStaffParam m_dataStaffParam;
+
+	[SerializeField]
+	private CtrlCharaCheck m_ctrlCharaCheck;
+
+	void Awake(){
+		m_btnFire.onClick.AddListener (OnClickFire);
+	}
+
+	private void OnFireDecide(){
+		Destroy (m_ctrlCharaCheck.gameObject);
+		DataManager.Instance.dataStaff.list.Remove (m_dataStaffParam);
+		UIAssistant.main.ShowPage ("WindowStaffList");
+	}
+	private void OnFireCancel(){
+		Destroy (m_ctrlCharaCheck.gameObject);
+	}
+
+	private void OnClickFire(){
+
+		m_ctrlCharaCheck= PrefabManager.Instance.MakeScript<CtrlCharaCheck> ("prefab/UguiCharaCheck", FrontPanel.Instance.gameObject);
+		m_ctrlCharaCheck.Initialize ("このスタッフを\n解雇しますがよろしいですか？");
+		m_ctrlCharaCheck.btnYes.onClick.AddListener (OnFireDecide);
+		m_ctrlCharaCheck.btnNo.onClick.AddListener (OnFireCancel);
+
+	}
+
 	private void Initialize( DataStaffParam _param ){
+
+		m_dataStaffParam = _param;
+
 
 		m_staffBanner.Initialize (_param);
 
