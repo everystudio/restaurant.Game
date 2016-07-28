@@ -11,22 +11,42 @@ public class StaffTrainingIcon : MonoBehaviour {
 	[SerializeField]
 	private CtrlUserParam m_cost;
 
-	public void Initialize( DataStaff.TRAINING _eTrainingType , DataStaffParam _param ){
+	private int m_iTrainingType;
+	public UnityEventInt OnClickTraining = new UnityEventInt();
 
-		m_imgIcon.sprite = SpriteManager.Instance.Load (string.Format ("texture/staff/staff_train_{0:D2}", (int)_eTrainingType));
+	public void OnClick(){
+		OnClickTraining.Invoke (m_iTrainingType);
+	}
+
+	public void UpdateTrainingType( int _iTrainingType ){
+
+		Button btn = gameObject.GetComponent<Button> ();
+		if (_iTrainingType == (int)DataStaff.TRAINING_TYPE.NONE) {
+			btn.interactable = true;
+		} else if (m_iTrainingType ==_iTrainingType) {
+			btn.interactable = true;
+		} else {
+			btn.interactable = false;
+		}
+
+	}
+
+	public void Initialize( DataStaff.TRAINING_TYPE _eTrainingType , DataStaffParam _param ){
+		m_iTrainingType = (int)_eTrainingType;
+		m_imgIcon.sprite = SpriteManager.Instance.Load (DataStaff.GetIconTraining ((int)_eTrainingType));
 
 		int iNeedNum = 0;
 		DataManager.USER_PARAM eUserParam;
 		switch (_eTrainingType) {
-		case DataStaff.TRAINING.BRUSH:
-		case DataStaff.TRAINING.DUMBBELL:
-		case DataStaff.TRAINING.SPOON:
+		case DataStaff.TRAINING_TYPE.BRUSH:
+		case DataStaff.TRAINING_TYPE.DUMBBELL:
+		case DataStaff.TRAINING_TYPE.SPOON:
 			eUserParam = DataManager.USER_PARAM.COIN;
 			iNeedNum = 10000;
 			break;
-		case DataStaff.TRAINING.DRESS:
-		case DataStaff.TRAINING.RIBBON:
-		case DataStaff.TRAINING.PAN:
+		case DataStaff.TRAINING_TYPE.DRESS:
+		case DataStaff.TRAINING_TYPE.RIBBON:
+		case DataStaff.TRAINING_TYPE.PAN:
 			eUserParam = DataManager.USER_PARAM.TICKET;
 			iNeedNum = 20;
 			break;
@@ -37,14 +57,10 @@ public class StaffTrainingIcon : MonoBehaviour {
 		m_cost.SetNum (eUserParam, iNeedNum);
 
 		Button btn = gameObject.GetComponent<Button> ();
-		if (_param.training_type == (int)DataStaff.TRAINING.NONE) {
-			btn.interactable = true;
-		} else if (_param.training_type == (int)_eTrainingType) {
-			btn.interactable = true;
-		} else {
-			btn.interactable = false;
-		}
+		btn.onClick.AddListener (OnClick);
 
+		UpdateTrainingType (m_iTrainingType);
+		_param.UpdateTrainingType.AddListener (UpdateTrainingType);
 	}
 
 }

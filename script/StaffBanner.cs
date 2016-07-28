@@ -37,6 +37,9 @@ public class StaffBanner : MonoBehaviour {
 	[SerializeField]
 	private CtrlUserParam m_paramKeihi;
 
+	[SerializeField]
+	private Image m_imgTraining;
+
 	private DataStaffParam m_dataStaffParam;
 	public void ButtonPushed(){
 		OnSelectStaff.Invoke (m_dataStaffParam.staff_serial);
@@ -44,6 +47,15 @@ public class StaffBanner : MonoBehaviour {
 
 	public void UpdateRole( int _iRole ){
 		m_imgRole.sprite = SpriteManager.Instance.Load( DataStaff.GetIconRole(_iRole));
+	}
+
+	public void UpdateTrainingType( int _iTrainingType ){
+		if (_iTrainingType == (int)DataStaff.TRAINING_TYPE.NONE) {
+			m_imgTraining.gameObject.SetActive (false);
+		} else {
+			m_imgTraining.gameObject.SetActive (true);
+			m_imgTraining.sprite = SpriteManager.Instance.Load (DataStaff.GetIconTraining(_iTrainingType) );
+		}
 	}
 
 	public void Initialize( DataStaffParam _param ){
@@ -57,6 +69,10 @@ public class StaffBanner : MonoBehaviour {
 
 		UpdateRole (_param.role);
 		_param.UpdateRole.AddListener (UpdateRole);
+
+		UpdateTrainingType (_param.training_type);
+		_param.UpdateTrainingType.AddListener (UpdateTrainingType);
+
 			
 		m_imgChara.sprite = SpriteManager.Instance.Load (MasterStaff.GetIconName (masterParam.staff_id));
 

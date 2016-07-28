@@ -42,7 +42,14 @@ public class DataStaffParam : CsvDataParam {
 			UpdateRole.Invoke (m_role);
 		}
 	}
-	public int training_type { get{ return m_training_type;} set{m_training_type = value; } }
+
+	public UnityEventInt UpdateTrainingType = new UnityEventInt ();
+	public int training_type {
+		get{ return m_training_type; }
+		set{ m_training_type = value;
+			UpdateTrainingType.Invoke (m_training_type);
+		}
+	}
 	public int training_last { get{ return m_training_last;} set{m_training_last = value; } }
 
 	public int manner { get{ return m_manner;} set{m_manner = value; } }
@@ -66,7 +73,7 @@ public class DataStaff : CsvData<DataStaffParam>
 		CHEF		,
 		MAX			,
 	}
-	public enum TRAINING
+	public enum TRAINING_TYPE
 	{
 		NONE		= 0,
 		BRUSH		,
@@ -76,6 +83,33 @@ public class DataStaff : CsvData<DataStaffParam>
 		RIBBON		,
 		PAN			,
 		MAX			,
+	}
+	public static string GetTrainingName( int _iTrainType ){
+
+		string strName = "";
+		switch ((TRAINING_TYPE)_iTrainType) {
+		case TRAINING_TYPE.BRUSH:
+			strName = "ブラシ";
+			break;
+		case TRAINING_TYPE.DUMBBELL:
+			strName = "ダンベル";
+			break;
+		case TRAINING_TYPE.SPOON:
+			strName = "お料理";
+			break;
+		case TRAINING_TYPE.DRESS:
+			strName = "ドレス";
+			break;
+		case TRAINING_TYPE.RIBBON:
+			strName = "新体操";
+			break;
+		case TRAINING_TYPE.PAN:
+			strName = "本格料理";
+			break;
+		default:
+			break;
+		}
+		return strName;
 	}
 
 	public DataStaffParam Select( int _iStaffSerial ){
@@ -104,6 +138,9 @@ public class DataStaff : CsvData<DataStaffParam>
 		strRet = string.Format ("texture/staff/staff_role{0:D2}_m", _iRole);
 		//Debug.LogError (strRet);
 		return strRet;
+	}
+	public static string GetIconTraining( int _iTraining){
+		return string.Format ("texture/staff/staff_train_{0:D2}", _iTraining);
 	}
 
 	public DataStaffParam Insert( int _iStaffId , int _iOfficeItemSerial , int _iCageSerial ){
