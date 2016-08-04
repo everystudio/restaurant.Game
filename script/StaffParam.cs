@@ -21,7 +21,7 @@ public class StaffParam : MonoBehaviour {
 
 	public void Set( StaffParam.TYPE _eType , DataStaffParam _param ){
 
-		m_imgIcon.sprite = SpriteManager.Instance.Load (string.Format ("texture/staff/staff_paramicon_{0:D2}", (int)_eType));
+		m_imgIcon.sprite = SpriteManager.Instance.LoadSprite (string.Format ("texture/staff/staff_paramicon_{0:D2}", (int)_eType));
 
 		string strParam = "0";
 		switch (_eType) {

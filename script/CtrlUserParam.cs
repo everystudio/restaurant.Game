@@ -17,13 +17,13 @@ public class CtrlUserParam : MonoBehaviour {
 	private void SetIcon (DataManager.USER_PARAM _eUserParam){
 		switch (_eUserParam) {
 		case DataManager.USER_PARAM.COIN:
-			m_imgIcon.sprite = SpriteManager.Instance.Load ("texture/ui/icon_coin");
+			m_imgIcon.sprite = SpriteManager.Instance.LoadSprite ("texture/ui/icon_coin");
 			break;
 		case DataManager.USER_PARAM.TICKET:
-			m_imgIcon.sprite = SpriteManager.Instance.Load ("texture/ui/icon_ticket");
+			m_imgIcon.sprite = SpriteManager.Instance.LoadSprite ("texture/ui/icon_ticket");
 			break;
 		case DataManager.USER_PARAM.POPULARITY:
-			m_imgIcon.sprite = SpriteManager.Instance.Load ("texture/ui/icon_popularity");
+			m_imgIcon.sprite = SpriteManager.Instance.LoadSprite ("texture/ui/icon_popularity");
 			break;
 		default:
 			Debug.LogError (_eUserParam);

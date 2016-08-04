@@ -33,7 +33,7 @@ public class StaffTrainingIcon : MonoBehaviour {
 
 	public void Initialize( DataStaff.TRAINING_TYPE _eTrainingType , DataStaffParam _param ){
 		m_iTrainingType = (int)_eTrainingType;
-		m_imgIcon.sprite = SpriteManager.Instance.Load (DataStaff.GetIconTraining ((int)_eTrainingType));
+		m_imgIcon.sprite = SpriteManager.Instance.LoadSprite (DataStaff.GetIconTraining ((int)_eTrainingType));
 
 		int iNeedNum = 0;
 		DataManager.USER_PARAM eUserParam;

@@ -15,7 +15,7 @@ public class DataStaffParam : CsvDataParam {
 	public int m_exp;
 	public int m_role;
 	public int m_training_type;
-	public int m_training_last;
+	public string m_training_last;
 
 	public int m_manner;
 	public int m_footwork;
@@ -50,7 +50,7 @@ public class DataStaffParam : CsvDataParam {
 			UpdateTrainingType.Invoke (m_training_type);
 		}
 	}
-	public int training_last { get{ return m_training_last;} set{m_training_last = value; } }
+	public string training_last { get{ return m_training_last;} set{m_training_last = value; } }
 
 	public int manner { get{ return m_manner;} set{m_manner = value; } }
 	public int footwork { get{ return m_footwork;} set{m_footwork = value; } }
@@ -158,6 +158,12 @@ public class DataStaff : CsvData<DataStaffParam>
 
 		//m_iSetStaffId , m_dataOffice.item_serial , m_dispOffice.SelectingCageSerial
 
+	}
+
+	public void AddNewStaff( DataStaffParam _param ){
+		_param.item_serial = list.Count;
+
+		list.Add (_param);
 	}
 
 }

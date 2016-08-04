@@ -37,7 +37,7 @@ public class StaffRoleBanner : MonoBehaviour {
 		gameObject.GetComponent<Button> ().onClick.AddListener (ChangeRole);
 
 		m_iRole = (int)_eRole;
-		m_imgIcon.sprite = SpriteManager.Instance.Load( DataStaff.GetIconRoleMiddle((int)_eRole));
+		m_imgIcon.sprite = SpriteManager.Instance.LoadSprite( DataStaff.GetIconRoleMiddle((int)_eRole));
 
 		switch (_eRole) {
 		case DataStaff.ROLE.FLOOR:

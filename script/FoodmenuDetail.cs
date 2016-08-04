@@ -45,9 +45,9 @@ public class FoodmenuDetail : MonoBehaviour {
 		if (DataManager.Instance.dataFoodmenu.IsProduced (m_masterFoodmenu.foodmenu_id)) {
 			m_btnFoodRegister.interactable = true;
 			if (DataManager.Instance.dataFoodmenu.IsRegisterd (m_masterFoodmenu.foodmenu_id)) {
-				m_imgBtnFoodRegister.sprite = SpriteManager.Instance.Load ("texture/food/btn_food_cancel");
+				m_imgBtnFoodRegister.sprite = SpriteManager.Instance.LoadSprite ("texture/food/btn_food_cancel");
 			} else {
-				m_imgBtnFoodRegister.sprite = SpriteManager.Instance.Load ("texture/food/btn_food_register");
+				m_imgBtnFoodRegister.sprite = SpriteManager.Instance.LoadSprite ("texture/food/btn_food_register");
 			}
 
 		} else {
@@ -99,7 +99,7 @@ public class FoodmenuDetail : MonoBehaviour {
 	public void Initialize( MasterFoodmenuParam _FoodmenuParam ){
 		m_masterFoodmenu = _FoodmenuParam;
 		m_txtMenuName.text = _FoodmenuParam.name;
-		m_imgMemuIcon.sprite = SpriteManager.Instance.Load (MasterFoodmenu.GetIconFilename (_FoodmenuParam.foodmenu_id));
+		m_imgMemuIcon.sprite = SpriteManager.Instance.LoadSprite (MasterFoodmenu.GetIconFilename (_FoodmenuParam.foodmenu_id));
 		m_ctrlPrice.SetNum (DataManager.USER_PARAM.COIN, _FoodmenuParam.coin);
 
 		m_foodElementVegetable.Initialize (Define.FOOD_ELEMENT.VEGETABLE, _FoodmenuParam.vegetable);

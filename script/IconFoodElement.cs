@@ -14,7 +14,7 @@ public class IconFoodElement : MonoBehaviour {
 
 	public void Initialize( Define.FOOD_ELEMENT _eElement , int _iNum ){
 		m_imgIcon = gameObject.GetComponent<Image> ();
-		m_imgIcon.sprite = SpriteManager.Instance.Load (string.Format ("texture/food/icon_food_element{0:D3}", (int)_eElement));
+		m_imgIcon.sprite = SpriteManager.Instance.LoadSprite (string.Format ("texture/food/icon_food_element{0:D3}", (int)_eElement));
 		SetNum (_iNum);
 	}
 }

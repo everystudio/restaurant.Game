@@ -65,4 +65,28 @@ public class MasterStaff : CsvData<MasterStaffParam> {
 		}
 	}
 
+	public void Create( ref DataStaffParam _param ){
+
+		MasterStaffParam param = list [0];
+
+		_param.staff_id = param.staff_id;
+
+		_param.exp = 0;
+		_param.level = 1;
+		_param.training_type = 0;
+		_param.training_last = TimeManager.StrGetTime ();
+
+		_param.manner = param.manner;
+		_param.footwork = param.footwork;
+		_param.cook = param.cook;
+
+
+
+
+
+
+
+
+	}
+
 }

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -56,6 +57,13 @@ public class RestaurantMain : Singleton<RestaurantMain> {
 		SpriteManager.Instance.LoadAtlas ("atlas/ui002");
 		SpriteManager.Instance.LoadAtlas ("atlas/ui003");
 
+		SpriteManager.Instance.LoadTexture2D ("texture/chara/girl_001.png");
+
+		/*
+		m_imgTest.sprite = SpriteManager.Instance.SpriteCreate ("texture/chara/girl_001.png", new Rect (0.0f, 98.0f, 64.0f, 98.0f), new Vector2(0.0f,0.0f));
+		m_imgTest.rectTransform.sizeDelta = new Vector2 (m_imgTest.sprite.rect.width, m_imgTest.sprite.rect.height);
+		*/
+
 		/*
 		DataMapChipRestaurant mapchip_sample = new DataMapChipRestaurant ();
 		mapchip_sample.Load ("data/mapchip_sample");
@@ -71,6 +79,10 @@ public class RestaurantMain : Singleton<RestaurantMain> {
 		m_maprootRestaurant.Initialize (param_list,"data/mapdata_restaurant" , m_setCamera );
 
 	}
+
+	//public int m_iAnim;
+	public float m_fTime;
+	//public Image m_imgTest;
 	
 	// Update is called once per frame
 	void Update () {
@@ -79,6 +91,21 @@ public class RestaurantMain : Singleton<RestaurantMain> {
 			m_eStepPre  = m_eStep;
 			bInit = true;
 		}
+
+		m_fTime += Time.deltaTime;
+
+		/*
+		if (0.25f < m_fTime) {
+			m_iAnim += 1;
+			if (9 <= m_iAnim) {
+				m_iAnim = 1;
+			}
+			m_imgTest.sprite = SpriteManager.Instance.SpriteCreate ("texture/chara/girl_001.png", new Rect (64.0f*m_iAnim, 98.0f, 64.0f, 98.0f), new Vector2(0.0f,0.0f));
+			m_fTime -= 0.25f;
+		}
+		*/
+
+
 		switch (m_eStep) {
 		case STEP.MAX:
 		default:

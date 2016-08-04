@@ -36,7 +36,7 @@ public class FoodmenuBanner : MonoBehaviour {
 
 	public void Initialize( MasterFoodmenuParam _param ){
 		m_masterFoodmenuParam = _param;
-		m_imgIcon.sprite = SpriteManager.Instance.Load (MasterFoodmenu.GetIconFilename (_param.foodmenu_id));
+		m_imgIcon.sprite = SpriteManager.Instance.LoadSprite (MasterFoodmenu.GetIconFilename (_param.foodmenu_id));
 		m_txtName.text = _param.name;
 		m_ctrlPrice.SetNum (DataManager.USER_PARAM.COIN, _param.coin);
 		m_ctrlRareStars.Initialize (_param.rarity);

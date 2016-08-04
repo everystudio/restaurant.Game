@@ -92,10 +92,10 @@ public class DataManager : DataManagerBase <DataManager>{
 		string strTime = TimeManager.StrGetTime ();
 		strTime = strTime.Replace("-" , "").Replace(":","").Replace(" ","");
 		strTime = string.Format ("({0})", strTime);
-		StartCoroutine(send (DataItem.FILENAME, "dataitem" , strTime));
+		//StartCoroutine(send (DataItem.FILENAME, "dataitem" , strTime));
 		StartCoroutine(send (DataStaff.FILENAME, "datastaff" , strTime));
-		StartCoroutine(send (DataMonster.FILENAME, "datamonster" , strTime));
-		StartCoroutine (send (DataWork.FILENAME, "datawork" , strTime));
+		//StartCoroutine(send (DataMonster.FILENAME, "datamonster" , strTime));
+		//StartCoroutine (send (DataWork.FILENAME, "datawork" , strTime));
 		StartCoroutine (send (DataKvs.FILE_NAME, "datakvs" , strTime));
 
 		/*
@@ -145,25 +145,28 @@ public class DataManager : DataManagerBase <DataManager>{
 		QualitySettings.vSyncCount = 0;
 
 		DontDestroyOnLoad(gameObject);
-
+		/*
 		if (PlayerPrefs.HasKey (DefineOld.USER_WIDTH) == false) {
 			PlayerPrefs.SetInt (DefineOld.USER_WIDTH, DefineOld.DEFUALT_USER_WIDTH);
 			PlayerPrefs.SetInt (DefineOld.USER_HEIGHT, DefineOld.DEFUALT_USER_WIDTH);
 		}
+		*/
 
 		//m_tDataUser.Initialize (iWidth,iHeight);
 		AllLoad();
+		/*
 		foreach( CsvLocalNotificationParam param in csv_localNotification ){
 			LocalNotificationManager.Instance.Add (param);
 		}
+		*/
 		return;
 	}
 	public void AllLoad(){
 		config.Load (CsvConfig.FILE_NAME);
 		kvs_data.Load( DataKvs.FILE_NAME );
 		m_csvItem.Load ();
-		m_csvMonster.Load ();
-		dataMonster.Load (DataMonster.FILENAME);
+		//m_csvMonster.Load ();
+		//dataMonster.Load (DataMonster.FILENAME);
 		//Debug.LogError ("here");
 		m_dataItem.Load (DataItem.FILENAME);
 
@@ -183,17 +186,17 @@ public class DataManager : DataManagerBase <DataManager>{
 		}
 
 
-		m_csvItemDetail.Load ();
+		//m_csvItemDetail.Load ();
 
 		//m_csvWork.Load ();
-		dataWork.Load (DataWork.FILENAME);
+		//dataWork.Load (DataWork.FILENAME);
 
 		m_csvStaff.Load ();
-		m_csvLevel.Load ();
-		m_csvTime.Load ();
-		m_csvWord.Load ();
-		m_csvTutorial.Load ();
-		m_csvLocalNotification.Load ();
+		//m_csvLevel.Load ();
+		//m_csvTime.Load ();
+		//m_csvWord.Load ();
+		//m_csvTutorial.Load ();
+		//m_csvLocalNotification.Load ();
 		RoadLoad ();
 
 	}
@@ -203,13 +206,13 @@ public class DataManager : DataManagerBase <DataManager>{
 		Debug.LogError ("save");
 		#endif
 		m_dataKvs.Save (DataKvs.FILE_NAME);
-		dataMonster.Save (DataMonster.FILENAME);
+		//dataMonster.Save (DataMonster.FILENAME);
 		dataStaff.Save (DataStaff.FILENAME);
 		m_dataItem.Save (DataItem.FILENAME);
-		dataWork.Save (DataWork.FILENAME);
+		//dataWork.Save (DataWork.FILENAME);
 
 		m_csvItem.Save (CsvItem.FilePath);
-		m_csvMonster.Save (CsvMonster.FilePath);
+		//m_csvMonster.Save (CsvMonster.FilePath);
 		m_csvStaff.Save (CsvStaffData.FilePath);
 
 		dataMapchip.Save (DataMapchip.FILENAME);
@@ -265,7 +268,7 @@ public class DataManager : DataManagerBase <DataManager>{
 		}
 	}
 
-
+	/*
 	public CsvMonster m_csvMonster = new CsvMonster();
 	static public List<CsvMonsterParam> csv_monster {
 		get{ 
@@ -294,6 +297,7 @@ public class DataManager : DataManagerBase <DataManager>{
 		}
 		return new CsvItemDetailData ();
 	}
+	*/
 	/*
 	public CsvWork m_csvWork = new CsvWork();
 	static public List<CsvWorkParam> csv_work {
@@ -301,7 +305,6 @@ public class DataManager : DataManagerBase <DataManager>{
 			return Instance.m_csvWork.All;
 		}
 	}
-	*/
 	static public DataWorkParam GetWork( int _iWorkId ){
 		foreach (DataWorkParam work in Instance.dataWork.list) {
 			if (work.work_id == _iWorkId) {
@@ -313,6 +316,7 @@ public class DataManager : DataManagerBase <DataManager>{
 	}
 	public DataWork dataWork = new DataWork ();
 	public DataMonster dataMonster = new DataMonster ();
+	*/
 
 	#region データ関連（一応ここに集約ポケット系は消したい）
 	public DataMapchip dataMapchip = new DataMapchip();
@@ -340,6 +344,7 @@ public class DataManager : DataManagerBase <DataManager>{
 		Debug.LogError ("ignore staff_id:" + _iStaffId.ToString ());
 		return new CsvStaffParam ();
 	}
+	/*
 	public CsvLevel m_csvLevel = new CsvLevel();
 	static public List<CsvLevelData> csv_level {
 		get{ 
@@ -366,7 +371,6 @@ public class DataManager : DataManagerBase <DataManager>{
 		}
 		return "-------";
 	}
-
 	public CsvTutorial m_csvTutorial = new CsvTutorial();
 	static public List<CsvTutorialData> csv_tutorial {
 		get{ 
@@ -380,8 +384,10 @@ public class DataManager : DataManagerBase <DataManager>{
 			return Instance.m_csvLocalNotification.All;
 		}
 	}
-	#endregion
+		*/
 
+	#endregion
+	/*
 	public CtrlHelp.ACTION_TYPE GetHelpActionType(){
 
 		int[] prob_arr = new int[(int)CtrlHelp.ACTION_TYPE.MAX] { 0 , 100 , 100 };
@@ -397,6 +403,7 @@ public class DataManager : DataManagerBase <DataManager>{
 
 		return eRet;
 	}
+	*/
 
 	public Dictionary<string , string > m_RoadMap = new Dictionary<string , string > ();
 	//public List<string> m_RoadMap = new List<string>();
@@ -406,7 +413,7 @@ public class DataManager : DataManagerBase <DataManager>{
 	public void RoadLoad(){
 		m_RoadMap.Clear ();
 		foreach (DataItemParam item in m_dataItem.list) {
-			if (item.status != 0 && item.item_id == DefineOld.ITEM_ID_ROAD) {
+			if (item.status != 0 && item.item_id == 10) {
 				string hash = _getRoadHash (item.x, item.y);
 				m_RoadMap.Add (hash,item.item_serial.ToString());
 			}
@@ -434,6 +441,7 @@ public class DataManager : DataManagerBase <DataManager>{
 	public float UpdateSymbolRate(){
 		float fTotalRate = 1.0f;
 		//List<DataItem> symbol_list = GameMain.dbItem.Select (" type = " + ((int)(DefineOld.Item.Type.SYMBOL)).ToString () + " ");
+		/*
 		List<DataItemParam> symbol_list = DataManager.Instance.m_dataItem.Select ( DefineOld.WHERE_PATTERN.RATE );
 		foreach( DataItemParam symbol in symbol_list ){
 			CsvItemParam csv_symbol_item_data = DataManager.GetItem (symbol.item_id);
@@ -441,6 +449,7 @@ public class DataManager : DataManagerBase <DataManager>{
 				fTotalRate = csv_symbol_item_data.revenue_up * 0.01f;
 			}
 		}
+		*/
 		m_fSymbolRate = fTotalRate;
 		return fTotalRate;
 	}

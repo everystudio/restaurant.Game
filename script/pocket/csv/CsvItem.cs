@@ -104,7 +104,7 @@ public class CsvItem : CsvData< CsvItemParam>
 		base.Update (_dict, string.Format (" item_id = {0}", _iItemId));
 		return;
 	}
-
+	/*
 	new public List<CsvItemParam> Select( string _strWhere ){
 		if (_strWhere.Equals ("ticket_gold") == true) {
 			List<CsvItemParam> ret_list = new List<CsvItemParam> ();
@@ -118,6 +118,7 @@ public class CsvItem : CsvData< CsvItemParam>
 			return base.Select(_strWhere);
 		}
 	}
+	*/
 
 	protected override CsvItemParam makeParam (List<SpreadSheetData> _list, int _iSerial, int _iRow)
 	{

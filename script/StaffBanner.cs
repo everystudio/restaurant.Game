@@ -46,7 +46,7 @@ public class StaffBanner : MonoBehaviour {
 	}
 
 	public void UpdateRole( int _iRole ){
-		m_imgRole.sprite = SpriteManager.Instance.Load( DataStaff.GetIconRole(_iRole));
+		m_imgRole.sprite = SpriteManager.Instance.LoadSprite( DataStaff.GetIconRole(_iRole));
 	}
 
 	public void UpdateTrainingType( int _iTrainingType ){
@@ -54,7 +54,7 @@ public class StaffBanner : MonoBehaviour {
 			m_imgTraining.gameObject.SetActive (false);
 		} else {
 			m_imgTraining.gameObject.SetActive (true);
-			m_imgTraining.sprite = SpriteManager.Instance.Load (DataStaff.GetIconTraining(_iTrainingType) );
+			m_imgTraining.sprite = SpriteManager.Instance.LoadSprite (DataStaff.GetIconTraining(_iTrainingType) );
 		}
 	}
 
@@ -73,15 +73,14 @@ public class StaffBanner : MonoBehaviour {
 		UpdateTrainingType (_param.training_type);
 		_param.UpdateTrainingType.AddListener (UpdateTrainingType);
 
-			
-		m_imgChara.sprite = SpriteManager.Instance.Load (MasterStaff.GetIconName (masterParam.staff_id));
+		m_imgChara.sprite = SpriteManager.Instance.SpriteCreate ( string.Format("texture/chara/staff_{0:D4}.png" , _param.staff_id ) , new Rect (0.0f, 98.0f, 64.0f, 98.0f), new Vector2(0.0f,0.0f));
 
 		if (5 <= masterParam.rarity) {
-			m_imgBack.sprite = SpriteManager.Instance.Load ("texture/staff/staff_banner03");
+			m_imgBack.sprite = SpriteManager.Instance.LoadSprite ("texture/staff/staff_banner03");
 		} else if (3 <= masterParam.rarity) {
-			m_imgBack.sprite = SpriteManager.Instance.Load ("texture/staff/staff_banner02");
+			m_imgBack.sprite = SpriteManager.Instance.LoadSprite ("texture/staff/staff_banner02");
 		} else {
-			m_imgBack.sprite = SpriteManager.Instance.Load ("texture/staff/staff_banner01");
+			m_imgBack.sprite = SpriteManager.Instance.LoadSprite ("texture/staff/staff_banner01");
 		}
 		m_slExp.maxValue = MasterStaff.GetNextExp (_param.level);
 		m_slExp.value = _param.exp;

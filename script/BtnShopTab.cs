@@ -33,7 +33,7 @@ public class BtnShopTab : MonoBehaviour {
 		} else {
 			strSprite = string.Format ("texture/ui/{0}_off", m_strTabImage);
 		}
-		m_imgButton.sprite = SpriteManager.Instance.Load (strSprite);
+		m_imgButton.sprite = SpriteManager.Instance.LoadSprite (strSprite);
 	}
 
 	private void pushedButton (){

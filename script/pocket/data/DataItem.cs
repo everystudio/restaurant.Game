@@ -42,6 +42,7 @@ public class DataItemParam : CsvDataParam{
 		return (DataItemParam)MemberwiseClone ();
 	}
 
+	/*
 	public DataItemParam( MapChipCSV _mapChip , CsvItem _csvItem ){
 
 		CsvItemParam item_data = new CsvItemParam ();
@@ -235,6 +236,7 @@ public class DataItemParam : CsvDataParam{
 		}
 		return fTotalRate;
 	}
+	*/
 
 
 
@@ -253,7 +255,7 @@ public class DataItem : CsvData<DataItemParam>{
 		return new DataItemParam ();
 	}
 
-
+	/*
 	public List<DataItemParam> Select( DefineOld.WHERE_PATTERN _ePattern , List<int> _iList = null ){
 
 		List<DataItemParam> ret = new List<DataItemParam> ();
@@ -265,6 +267,7 @@ public class DataItem : CsvData<DataItemParam>{
 		}
 		return ret;
 	}
+	*/
 
 
 	/*
@@ -315,7 +318,7 @@ public class DataItem : CsvData<DataItemParam>{
 		}
 	}
 	*/
-
+	/*
 	static public void OpenNewItem( int _iKeyItemId ){
 
 		List<CsvItemParam> open_item_list = DataManager.Instance.m_csvItem.Select (string.Format (" status = {0} and open_item_id = {1} ", (int)DefineOld.Item.Status.NONE, _iKeyItemId));
@@ -327,6 +330,7 @@ public class DataItem : CsvData<DataItemParam>{
 		return;
 	
 	}
+	*/
 
 	public void Update( int _iSerial , int _iStatus , int _iX , int _iY ){
 		//Debug.LogError (string.Format ("serial={0} status={1} x={2} y={3}", _iSerial, _iStatus, _iX, _iY));
@@ -389,7 +393,7 @@ public class DataItem : CsvData<DataItemParam>{
 	}
 
 }
-
+/*
 [System.Serializable]
 public class CsvItemParamPre :SODataParam{
 
@@ -552,7 +556,7 @@ public class CsvItemParamPre :SODataParam{
 
 }
 
-
+*/
 
 
 

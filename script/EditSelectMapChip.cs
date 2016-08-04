@@ -25,7 +25,7 @@ public class EditSelectMapChip : MonoBehaviourEx {
 		m_txtCapacity.text = "";
 		m_txtNum.text = "";
 
-		m_imgItem.sprite = SpriteManager.Instance.Load (DataManager.Instance.MakeItemSpriteNameLoad (m_param.item_id));
+		m_imgItem.sprite = SpriteManager.Instance.LoadSprite (DataManager.Instance.MakeItemSpriteNameLoad (m_param.item_id));
 
 		m_btn.onClick.AddListener (OnSelected);
 	}

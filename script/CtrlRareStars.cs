@@ -16,7 +16,7 @@ public class CtrlRareStars : MonoBehaviour {
 			} else {
 				strFilename = "texture/ui/star_empty";
 			}
-			m_imgStarArr [i].sprite = SpriteManager.Instance.Load (strFilename);
+			m_imgStarArr [i].sprite = SpriteManager.Instance.LoadSprite (strFilename);
 		}
 	}
 

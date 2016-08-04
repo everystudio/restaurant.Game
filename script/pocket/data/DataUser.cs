@@ -59,14 +59,14 @@ public class DataUser {
 	public int m_iShisyutsuPerHour;
 
 	public bool m_bInitialized;
-
+	/*
 	public void AddSyakkin( int _iGold ){
 		m_iSyakkin += _iGold;
 		if (m_iSyakkin <= 0) {
 			m_iSyakkin = 0;
 			if (PlayerPrefs.HasKey ("kansai") == false) {
 				PlayerPrefs.SetInt ("kansai", 1);
-				CtrlDebit.m_bOpen = true;
+				//CtrlDebit.m_bOpen = true;
 			}
 		}
 		DataManager.Instance.kvs_data.WriteInt (DefineOld.USER_SYAKKIN, m_iSyakkin);
@@ -120,6 +120,7 @@ public class DataUser {
 		}
 		return bRet;
 	}
+	*/
 	#endregion
 
 }
