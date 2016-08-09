@@ -57,12 +57,10 @@ public class RestaurantMain : Singleton<RestaurantMain> {
 		SpriteManager.Instance.LoadAtlas ("atlas/ui002");
 		SpriteManager.Instance.LoadAtlas ("atlas/ui003");
 
-		SpriteManager.Instance.LoadTexture2D ("texture/chara/girl_001.png");
+		SpriteManager.Instance.LoadTexture2D (m_strTexture);
 
-		/*
-		m_imgTest.sprite = SpriteManager.Instance.SpriteCreate ("texture/chara/girl_001.png", new Rect (0.0f, 98.0f, 64.0f, 98.0f), new Vector2(0.0f,0.0f));
+		m_imgTest.sprite = SpriteManager.Instance.SpriteCreate (m_strTexture, new Rect (0.0f, 98.0f, 64.0f, 98.0f), new Vector2(0.0f,0.0f));
 		m_imgTest.rectTransform.sizeDelta = new Vector2 (m_imgTest.sprite.rect.width, m_imgTest.sprite.rect.height);
-		*/
 
 		/*
 		DataMapChipRestaurant mapchip_sample = new DataMapChipRestaurant ();
@@ -80,10 +78,11 @@ public class RestaurantMain : Singleton<RestaurantMain> {
 
 	}
 
-	//public int m_iAnim;
 	public float m_fTime;
-	//public Image m_imgTest;
-	
+	public int m_iAnim;
+	public int m_iAnimOffset;
+	public Image m_imgTest;
+	public string m_strTexture;
 	// Update is called once per frame
 	void Update () {
 		bool bInit = false;
@@ -94,16 +93,15 @@ public class RestaurantMain : Singleton<RestaurantMain> {
 
 		m_fTime += Time.deltaTime;
 
-		/*
 		if (0.25f < m_fTime) {
 			m_iAnim += 1;
 			if (9 <= m_iAnim) {
 				m_iAnim = 1;
 			}
-			m_imgTest.sprite = SpriteManager.Instance.SpriteCreate ("texture/chara/girl_001.png", new Rect (64.0f*m_iAnim, 98.0f, 64.0f, 98.0f), new Vector2(0.0f,0.0f));
+			m_iAnimOffset %= 8;
+			m_imgTest.sprite = SpriteManager.Instance.SpriteCreate (m_strTexture, new Rect (64.0f*m_iAnim, 98.0f*m_iAnimOffset, 64.0f, 98.0f), new Vector2(0.0f,0.0f));
 			m_fTime -= 0.25f;
 		}
-		*/
 
 
 		switch (m_eStep) {
